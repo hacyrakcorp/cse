@@ -67,6 +67,7 @@ public abstract class Utilisateur {
             
             while (rs.next()) {
                 String nomU = rs.getString("nom");
+                String prenomU = rs.getString("prenom");
             }
                 
             
