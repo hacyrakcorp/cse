@@ -5,24 +5,31 @@
  */
 package Modele;
 
-import com.mysql.jdbc.Statement;
-import java.sql.*;
-import Controleur.connexion.ConnexionControleur;
-import javax.swing.JOptionPane;
 
+import java.sql.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Cécile
  */
-public abstract class Utilisateur {
+public class Utilisateur {
+    
+    int id;
     String mdp;
     String nom;
     String prenom;
-    
-    private static Connection laConnexion = 
-            ConnexionControleur.getLaConnexionStatique();
-    
+    int id_statut;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getMdp() {
         return mdp;
     }
@@ -47,8 +54,19 @@ public abstract class Utilisateur {
         this.prenom = prenom;
     }
 
+    public int getId_statut() {
+        return id_statut;
+    }
+
+    public void setId_statut(int id_statut) {
+        this.id_statut = id_statut;
+    }
+    
+    
+
     //CONSTRUCTEURS
-    public Utilisateur(String mdp, String nom, String prenom) {
+    public Utilisateur(int id, String mdp, String nom, String prenom) {
+        this.id = id;
         this.mdp = mdp;
         this.nom = nom;
         this.prenom = prenom;
@@ -56,29 +74,82 @@ public abstract class Utilisateur {
 
     public Utilisateur() {
     }
-    
-    public void readCRUD() {
+
+    public static ArrayList getAllList() {
+        ArrayList tab = new ArrayList();
         try {
-            Statement state = (Statement) laConnexion.createStatement();
-            String sql = "SELECT *"
-                    + "FROM utilisateur"
+            String sql = "SELECT * "
+                    + "FROM utilisateur "
                     + "ORDER BY nom";
-            ResultSet rs = state.executeQuery(sql);
-            
-            while (rs.next()) {
-                String nomU = rs.getString("nom");
-                String prenomU = rs.getString("prenom");
+            ResultSet rs = ConnexionParametres.requeter(sql);
+            if (rs != null) {
+                while (rs.next()) {
+                    Utilisateur obj = new Utilisateur();
+                    obj.setId(rs.getInt("id"));
+                    obj.setNom(rs.getString("nom"));
+                    obj.setPrenom(rs.getString("prenom"));
+                    obj.setMdp(rs.getString("motDePasse"));
+                    obj.setId_statut(rs.getInt("id_Statut"));
+
+                    tab.add(obj);
+                }
             }
-                
-            
-            
+
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
                     "Problème rencontré : " + e.getMessage(),
                     "Résultat", JOptionPane.ERROR_MESSAGE);
         }
+        return tab;
     }
     
-    
-    
+    public static ArrayList getById(int id){
+        ArrayList tab = new ArrayList();
+        try {
+            String sql = "SELECT * "
+                    + "FROM utilisateur "
+                    + "WHERE id = "+id;
+            ResultSet rs = ConnexionParametres.requeter(sql);
+            if (rs != null) {
+                while (rs.next()) {
+                    Utilisateur obj = new Utilisateur();
+                    obj.setId(rs.getInt("id"));
+                    obj.setNom(rs.getString("nom"));
+                    obj.setPrenom(rs.getString("prenom"));
+                    obj.setMdp(rs.getString("motDePasse"));
+                    obj.setId_statut(rs.getInt("id_Statut"));
+
+                    tab.add(obj);
+                }
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return tab;
+    }
+
+    public static void main(String[] args) {
+        Utilisateur user = new Utilisateur();
+        
+        ArrayList<Utilisateur> tabUser = new ArrayList<Utilisateur>();
+        tabUser = user.getAllList();
+        
+        System.out.println(tabUser);
+        
+        for (Utilisateur x : tabUser){//foreach JAVA
+            System.out.println(x.getPrenom());
+            System.out.println(x.getNom());
+        }
+        
+        ArrayList<Utilisateur> user1 = Utilisateur.getById(2);
+        for (Utilisateur x : user1){//foreach JAVA
+            System.out.println(x.getPrenom());
+            System.out.println(x.getNom());
+        }
+        
+    }
+
 }

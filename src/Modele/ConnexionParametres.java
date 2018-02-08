@@ -5,6 +5,14 @@
  */
 package Modele;
 
+import Controleur.connexion.ConnexionControleur;
+import com.mysql.jdbc.Statement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Cécile
@@ -52,6 +60,38 @@ public class ConnexionParametres {
         motDePasse = "root";
         driverSGBD = "com.mysql.jdbc.Driver";
         serveurBD = "jdbc:mysql://localhost/cse";
+    }
+    
+    
+    
+    public static ResultSet requeter(String sql) throws SQLException {
+        Connection laConnexion = ConnexionControleur.getLaConnexionStatique();
+        ResultSet rs = null;
+        try{
+            Statement state = (Statement) laConnexion.createStatement();
+            rs = state.executeQuery(sql);
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return rs; 
+    }
+    
+    public static ResultSet executer(String sql) throws SQLException {
+        Connection laConnexion = ConnexionControleur.getLaConnexionStatique();
+        ResultSet rs = null;
+        try{
+            Statement state = (Statement) laConnexion.createStatement();
+            rs = state.executeQuery(sql);
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return rs; 
     }
     
     

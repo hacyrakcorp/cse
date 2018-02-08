@@ -32,9 +32,9 @@ public abstract class ConnexionControleur {
             JOptionPane.showMessageDialog(null,
                     "OK");
         } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null,
+           /* JOptionPane.showMessageDialog(null,
                     "Classe non trouvée pour le chargement du pilote JDBC Mysql",
-                    "ALERT", JOptionPane.ERROR_MESSAGE);
+                    "ALERT", JOptionPane.ERROR_MESSAGE);*/
             ok = false;
             etatConnexion = false;
         }
@@ -51,8 +51,7 @@ public abstract class ConnexionControleur {
                 laConnexionStatique = (Connection) DriverManager
                         .getConnection(urlBD, nomUtilisateur, motDePasse);
                 etatConnexion = true;
-                JOptionPane.showMessageDialog(null,
-                        "OK OK OK");
+                //JOptionPane.showMessageDialog(null,"OK OK OK");
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null,
                         "Impossible de se connecter à la base de données",
