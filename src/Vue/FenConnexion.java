@@ -7,7 +7,8 @@ package Vue;
 
 import javax.swing.*;
 import java.awt.*;
-import Controleur.connexion.ConnexionControleur;
+//import Controleur.connexion.ConnexionControleur;
+import Controleur.connexion.*;
 
 /**
  *
@@ -67,6 +68,11 @@ public class FenConnexion extends javax.swing.JFrame {
         getContentPane().add(jLab_MDP, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
 
         jTxT_Nom.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTxT_Nom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxT_NomActionPerformed(evt);
+            }
+        });
         getContentPane().add(jTxT_Nom, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 130, -1));
 
         jPassword_MDP.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -141,8 +147,14 @@ public class FenConnexion extends javax.swing.JFrame {
         FenMenuPrincipal laFenetre = new FenMenuPrincipal();
         laFenetre.setVisible(true);
         dispose();
-        
+        String login = jTxT_Nom.getText();
+        String mdp = new String(jPassword_MDP.getPassword());
+        AuthentificationControleur.traitementLogIn(login,mdp);
     }//GEN-LAST:event_jBtn_ValiderActionPerformed
+
+    private void jTxT_NomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxT_NomActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxT_NomActionPerformed
 
     /**
      * @param args the command line arguments

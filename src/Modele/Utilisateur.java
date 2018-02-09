@@ -5,7 +5,6 @@
  */
 package Modele;
 
-
 import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -15,12 +14,12 @@ import javax.swing.JOptionPane;
  * @author Cécile
  */
 public class Utilisateur {
-    
+
     int id;
     String mdp;
     String nom;
     String prenom;
-    int id_statut;
+    Statut id_statut;
 
     public int getId() {
         return id;
@@ -54,15 +53,13 @@ public class Utilisateur {
         this.prenom = prenom;
     }
 
-    public int getId_statut() {
+    public Statut getId_statut() {
         return id_statut;
     }
 
-    public void setId_statut(int id_statut) {
+    public void setId_statut(Statut id_statut) {
         this.id_statut = id_statut;
     }
-    
-    
 
     //CONSTRUCTEURS
     public Utilisateur(int id, String mdp, String nom, String prenom) {
@@ -89,10 +86,11 @@ public class Utilisateur {
                     obj.setNom(rs.getString("nom"));
                     obj.setPrenom(rs.getString("prenom"));
                     obj.setMdp(rs.getString("motDePasse"));
-                    obj.setId_statut(rs.getInt("id_Statut"));
+                    obj.setId_statut(Statut.getById(rs.getInt("id_Statut")));
 
                     tab.add(obj);
                 }
+                rs.close();
             }
 
         } catch (SQLException e) {
@@ -100,15 +98,16 @@ public class Utilisateur {
                     "Problème rencontré : " + e.getMessage(),
                     "Résultat", JOptionPane.ERROR_MESSAGE);
         }
+
         return tab;
     }
-    
-    public static ArrayList getById(int id){
+
+    public static ArrayList getById(int id) {
         ArrayList tab = new ArrayList();
         try {
             String sql = "SELECT * "
                     + "FROM utilisateur "
-                    + "WHERE id = "+id;
+                    + "WHERE id = " + id;
             ResultSet rs = ConnexionParametres.requeter(sql);
             if (rs != null) {
                 while (rs.next()) {
@@ -117,10 +116,11 @@ public class Utilisateur {
                     obj.setNom(rs.getString("nom"));
                     obj.setPrenom(rs.getString("prenom"));
                     obj.setMdp(rs.getString("motDePasse"));
-                    obj.setId_statut(rs.getInt("id_Statut"));
-
+                    obj.setId_statut(Statut.getById(rs.getInt("id_Statut")));
+                    
                     tab.add(obj);
                 }
+                rs.close();
             }
 
         } catch (SQLException e) {
@@ -133,23 +133,25 @@ public class Utilisateur {
 
     public static void main(String[] args) {
         Utilisateur user = new Utilisateur();
-        
+
         ArrayList<Utilisateur> tabUser = new ArrayList<Utilisateur>();
         tabUser = user.getAllList();
-        
+
         System.out.println(tabUser);
-        
-        for (Utilisateur x : tabUser){//foreach JAVA
+
+        for (Utilisateur x : tabUser) {//foreach JAVA
             System.out.println(x.getPrenom());
             System.out.println(x.getNom());
         }
+
+        ArrayList<Utilisateur> user1 = Utilisateur.getById(1);
         
-        ArrayList<Utilisateur> user1 = Utilisateur.getById(2);
-        for (Utilisateur x : user1){//foreach JAVA
+        for (Utilisateur x : user1) {//foreach JAVA
             System.out.println(x.getPrenom());
             System.out.println(x.getNom());
+            System.out.println(x.getId_statut().getId());    
         }
-        
+
     }
 
 }
