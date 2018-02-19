@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Lun 05 Février 2018 à 15:26
+-- Généré le :  Lun 19 Février 2018 à 10:43
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.1.10
 
@@ -147,6 +147,14 @@ CREATE TABLE `statut` (
   `libelle` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `statut`
+--
+
+INSERT INTO `statut` (`id`, `libelle`) VALUES
+(1, 'administrateur'),
+(2, 'responsable de filiere');
+
 -- --------------------------------------------------------
 
 --
@@ -171,6 +179,14 @@ CREATE TABLE `utilisateur` (
   `motDePasse` varchar(25) NOT NULL,
   `id_Statut` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `motDePasse`, `id_Statut`) VALUES
+(1, 'Aliaga', 'Cecile', 'cecile', 1),
+(2, 'Miniscloux', 'Anthony', 'anthony', 2);
 
 --
 -- Index pour les tables exportées
@@ -289,7 +305,7 @@ ALTER TABLE `promotion`
 -- AUTO_INCREMENT pour la table `statut`
 --
 ALTER TABLE `statut`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `typeevaluation`
 --
@@ -299,7 +315,7 @@ ALTER TABLE `typeevaluation`
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Contraintes pour les tables exportées
 --
