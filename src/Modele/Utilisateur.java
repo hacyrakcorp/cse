@@ -130,6 +130,32 @@ public class Utilisateur {
         }
         return tab;
     }
+    
+    public static Utilisateur getByLogin(String login) {
+        Utilisateur obj = new Utilisateur();
+        try {
+            String sql = "SELECT * "
+                    + "FROM utilisateur "
+                    + "WHERE nom = '" + login+"'";
+            ResultSet rs = ConnexionParametres.requeter(sql);
+            if (rs != null) {
+                while (rs.next()) {
+                    obj.setId(rs.getInt("id"));
+                    obj.setNom(rs.getString("nom"));
+                    obj.setPrenom(rs.getString("prenom"));
+                    obj.setMdp(rs.getString("motDePasse"));
+                    obj.setId_statut(Statut.getById(rs.getInt("id_Statut")));
+                }
+                rs.close();
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return obj;
+    }
 
     public static void main(String[] args) {
         Utilisateur user = new Utilisateur();

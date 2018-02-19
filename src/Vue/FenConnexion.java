@@ -144,12 +144,12 @@ public class FenConnexion extends javax.swing.JFrame {
 //Bouton Valider valide la sélection pour accéder à la FenMenuPrincipal
     private void jBtn_ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtn_ValiderActionPerformed
         // TODO add your handling code here:
-        FenMenuPrincipal laFenetre = new FenMenuPrincipal();
+       /* FenMenuPrincipal laFenetre = new FenMenuPrincipal();
         laFenetre.setVisible(true);
-        dispose();
+        dispose();*/
         String login = jTxT_Nom.getText();
         String mdp = new String(jPassword_MDP.getPassword());
-        AuthentificationControleur.traitementLogIn(login,mdp);
+        AuthentificationControleur.traitementLogIn(login,mdp,this);
     }//GEN-LAST:event_jBtn_ValiderActionPerformed
 
     private void jTxT_NomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxT_NomActionPerformed

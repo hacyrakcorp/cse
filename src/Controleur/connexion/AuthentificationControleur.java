@@ -5,32 +5,45 @@
  */
 package Controleur.connexion;
 
+import Modele.Utilisateur;
+import Vue.FenConnexion;
+import Vue.FenMenuPrincipal;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Cécile
  */
 public class AuthentificationControleur {
-    public static void traitementLogIn(String login,String mdp){
+
+    public static void traitementLogIn(String login, String mdp, FenConnexion fenCo) {
         //Récupération du login / mdp
         //Si les champs sont remplis
-        if (!login.isEmpty() && !mdp.isEmpty()){
-            //Récupère un Utilisateur selon le login (getByLogin)    
+        if (!login.isEmpty() && !mdp.isEmpty()) {
             //Si on recupere un Utilisateur
-                //Récupere le mdp (getByMdp)
-                //Comparaison avec le mdp récupéré
+            if (Utilisateur.getByLogin(login) != null) {
                 //Si mdp correct
+                if (Utilisateur.getByLogin(login).getMdp().equals(mdp)) {
                     //Récupere le statut (getById_statut)
-                        //Faire une session est authentifié
-                        //Faire une session Statut
-                        //Faire une session Utilisateur
-                        //Rediriger vers la fenetre correspondante
-                //Sinon
-                    //Erreur identifiant incorrect
-            //Sinon Utilisateur est vide
-                //Erreur identifiant incorrect
-        } else {
-        //Sinon les champs sont vides
-            //Erreur
+                    
+                    //Rediriger vers la fenetre correspondante
+                    FenMenuPrincipal laFenetre = new FenMenuPrincipal();
+                    laFenetre.setVisible(true);
+                    fenCo.setVisible(false);
+                } else { // Erreur mdp
+                    JOptionPane.showMessageDialog(null,
+                            "Identifiants incorrects. Ré-essayer !",
+                            "Résultat", JOptionPane.ERROR_MESSAGE);
+                }
+            } else { //Erreur login
+                JOptionPane.showMessageDialog(null,
+                        "Identifiants incorrects. Ré-essayer !",
+                        "Résultat", JOptionPane.ERROR_MESSAGE);
+            }
+        } else { //Remplir les champs
+            JOptionPane.showMessageDialog(null,
+                    "Veuillez remplir tout les champs",
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
