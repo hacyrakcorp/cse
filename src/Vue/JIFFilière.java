@@ -8,11 +8,9 @@ package Vue;
 import Controleur.connexion.AdministrateurControleur;
 import Modele.Filiere;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Vector;
 import javax.swing.JList;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.JOptionPane;
+
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,10 +24,10 @@ public class JIFFilière extends javax.swing.JInternalFrame {
      */
     public JIFFilière() {
         initComponents();
-        tableauFiliere();
+        this.tableauFiliere();
     }
 
-    private void listerFiliere() {
+   /* private void listerFiliere() {
         ArrayList<Filiere> tabFiliere = AdministrateurControleur.ListeFiliere();
         Vector vecteur = new Vector();
         for (Filiere x : tabFiliere) {
@@ -38,25 +36,23 @@ public class JIFFilière extends javax.swing.JInternalFrame {
         JList liste = new JList(vecteur);
 
         getContentPane().add(liste, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, 400, 300));
-    }
+    }*/
 
-    private static void tableauFiliere() {
+    public void tableauFiliere() {
         DefaultTableModel model = (DefaultTableModel) tabFiliere.getModel();
-        
+
+        model.getDataVector().clear();
         ArrayList<Filiere> listeFiliere = AdministrateurControleur.ListeFiliere();
-        for(int i=0;i<listeFiliere.size();i++) {
+        for (int i = 0; i < listeFiliere.size(); i++) {
             model.addRow(new Object[]{listeFiliere.get(i).getId(), listeFiliere.get(i).getLibelle()});
         }
+        tabFiliere.getColumnModel().getColumn(0).setMaxWidth(0);
+        tabFiliere.getColumnModel().getColumn(0).setMinWidth(0);
+        tabFiliere.getColumnModel().getColumn(0).setPreferredWidth(0);
     }
     
-    public static void actualiser(){
-        DefaultTableModel model = (DefaultTableModel) tabFiliere.getModel();
-        model.addRow(new Object[]{listeFiliere.get(i).getId(), listeFiliere.get(i).getLibelle()});
-        }
-    }
-    
-    public static void main(String[] args){
-        tableauFiliere();
+    public void viderNomFiliere(){
+        jNomFiliere.setText("Nouvelle Filiere");
     }
 
     /**
@@ -73,6 +69,7 @@ public class JIFFilière extends javax.swing.JInternalFrame {
         tabFiliere = new javax.swing.JTable();
         jBtnAjouter = new javax.swing.JButton();
         jNomFiliere = new javax.swing.JTextField();
+        jBtnSupprimer = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -86,7 +83,7 @@ public class JIFFilière extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Id", "Libelle"
+                "Id", "Nom de la filière"
             }
         ) {
             Class[] types = new Class [] {
@@ -106,7 +103,7 @@ public class JIFFilière extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tabFiliere);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 100));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 170));
 
         jBtnAjouter.setText("Ajouter");
         jBtnAjouter.addActionListener(new java.awt.event.ActionListener() {
@@ -114,7 +111,7 @@ public class JIFFilière extends javax.swing.JInternalFrame {
                 jBtnAjouterActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnAjouter, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 80, -1, -1));
+        getContentPane().add(jBtnAjouter, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, -1, -1));
 
         jNomFiliere.setText("Nouvelle Filiere");
         jNomFiliere.setToolTipText("");
@@ -123,19 +120,18 @@ public class JIFFilière extends javax.swing.JInternalFrame {
                 jNomFiliereFocusGained(evt);
             }
         });
-        jNomFiliere.addActionListener(new java.awt.event.ActionListener() {
+        getContentPane().add(jNomFiliere, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 230, -1));
+
+        jBtnSupprimer.setText("-");
+        jBtnSupprimer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jNomFiliereActionPerformed(evt);
+                jBtnSupprimerActionPerformed(evt);
             }
         });
-        getContentPane().add(jNomFiliere, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 230, -1));
+        getContentPane().add(jBtnSupprimer, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 170, -1, -1));
 
-        setBounds(0, 0, 875, 623);
+        setBounds(0, 0, 475, 368);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jNomFiliereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNomFiliereActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jNomFiliereActionPerformed
 
     private void jNomFiliereFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jNomFiliereFocusGained
         // TODO add your handling code here:
@@ -144,11 +140,26 @@ public class JIFFilière extends javax.swing.JInternalFrame {
 
     private void jBtnAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAjouterActionPerformed
         // TODO add your handling code here:
-        AdministrateurControleur.AjouterFiliere(jNomFiliere.getText());
+        AdministrateurControleur.AjouterFiliere(jNomFiliere.getText(),this);
     }//GEN-LAST:event_jBtnAjouterActionPerformed
+
+    private void jBtnSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSupprimerActionPerformed
+        // TODO add your handling code here:
+        int ligneSelect = tabFiliere.getSelectedRow();
+        if (ligneSelect != -1){
+            int id = (int) tabFiliere.getValueAt(ligneSelect,0);
+            AdministrateurControleur.SupprimerFiliere(id, this);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Sélectionner une filière à supprimer",
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_jBtnSupprimerActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAjouter;
+    private javax.swing.JButton jBtnSupprimer;
     private javax.swing.JTextField jNomFiliere;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTable tabFiliere;

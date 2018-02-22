@@ -137,5 +137,30 @@ public class Filiere {
         return ok;
     }
     
+    public static boolean supprimerFiliere(int id){
+        boolean ok = false;
+        try {
+            String sql = "DELETE FROM filiere "
+                    + "WHERE id = "+ id;
+            if (ConnexionParametres.executer(sql)) {
+                ok = true;
+            };
+           /* ResultSet rs = ConnexionParametres.requeter("SELECT * FROM filiere");
+            rs.afterLast();
+            GETLASTINSERTED :
+            while (rs.previous()){
+                if (rs.getObject(1).equals(id)){
+                    ok = true;
+                }
+                break GETLASTINSERTED;
+            }*/
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return ok;
+    }
+    
     
 }

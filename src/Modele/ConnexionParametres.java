@@ -79,20 +79,21 @@ public class ConnexionParametres {
         return rs; 
     }
     
-    public static void executer(String sql) throws SQLException {
+    public static boolean executer(String sql) throws SQLException {
         Connection laConnexion = ConnexionControleur.getLaConnexionStatique();
-
+        boolean verif = false;
         try{
             Statement state = (Statement) laConnexion.createStatement();
             PreparedStatement pst = laConnexion.prepareStatement(sql);
             state.execute(sql);
+            verif = true;
             
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
                     "Problème rencontré : " + e.getMessage(),
                     "Résultat", JOptionPane.ERROR_MESSAGE);
         }
-
+        return verif;
     }
     
     

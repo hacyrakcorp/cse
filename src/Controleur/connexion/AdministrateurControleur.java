@@ -17,11 +17,12 @@ public class AdministrateurControleur {
         return Filiere.getAllList(); 
     }
     
-    public static void AjouterFiliere(String nomFiliere){
+    public static void AjouterFiliere(String nomFiliere, JIFFilière fen){
         if (!nomFiliere.equals("") && !nomFiliere.equals("Nouvelle Filiere")){
             if (Filiere.getByLibelle(nomFiliere.toUpperCase()).getLibelle() == null){
                if (Filiere.creerFiliere(nomFiliere.toUpperCase()) == true) {
-                   JIFFilière.actualiser();
+                   fen.tableauFiliere();
+                   fen.viderNomFiliere();
                } else {
                    JOptionPane.showMessageDialog(null,
                     "La filière n'a pu être enregistrée",
@@ -36,7 +37,22 @@ public class AdministrateurControleur {
             JOptionPane.showMessageDialog(null,
                     "Veuillez remplir le champs",
                     "Résultat", JOptionPane.ERROR_MESSAGE);
+        }   
+    }
+    
+    public static void SupprimerFiliere(int id, JIFFilière fen){
+        if (!Filiere.getById(id).getLibelle().equals(null)){
+            if (Filiere.supprimerFiliere(id) == true){
+                fen.tableauFiliere();
+            } else {
+                JOptionPane.showMessageDialog(null,
+                    "Impossible de supprimer la filière",
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Impossible de supprimer la filière",
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
         }
-        
     }
 }
