@@ -5,6 +5,8 @@
  */
 package Vue;
 
+import Controleur.connexion.AdministrateurControleur;
+
 /**
  *
  * @author aminiscloux
@@ -146,6 +148,8 @@ public class FenMenuPrincipal extends javax.swing.JFrame {
         JIFFilière laFenetreInterne = new JIFFilière();
         jDesktopPane_Principal.add(laFenetreInterne);
         laFenetreInterne.setVisible(true);
+        
+        
     }//GEN-LAST:event_jMenuItem_FilièresActionPerformed
 
 

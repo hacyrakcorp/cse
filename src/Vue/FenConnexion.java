@@ -77,6 +77,11 @@ public class FenConnexion extends javax.swing.JFrame {
 
         jPassword_MDP.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPassword_MDP.setText("jPasswordField1");
+        jPassword_MDP.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPassword_MDPFocusGained(evt);
+            }
+        });
         getContentPane().add(jPassword_MDP, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 130, -1));
 
         jBtn_Valider.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -155,6 +160,11 @@ public class FenConnexion extends javax.swing.JFrame {
     private void jTxT_NomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxT_NomActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxT_NomActionPerformed
+
+    private void jPassword_MDPFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPassword_MDPFocusGained
+        // TODO add your handling code here:
+        jPassword_MDP.setText("");
+    }//GEN-LAST:event_jPassword_MDPFocusGained
 
     /**
      * @param args the command line arguments

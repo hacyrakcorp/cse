@@ -79,19 +79,20 @@ public class ConnexionParametres {
         return rs; 
     }
     
-    public static ResultSet executer(String sql) throws SQLException {
+    public static void executer(String sql) throws SQLException {
         Connection laConnexion = ConnexionControleur.getLaConnexionStatique();
-        ResultSet rs = null;
+
         try{
             Statement state = (Statement) laConnexion.createStatement();
-            rs = state.executeQuery(sql);
+            PreparedStatement pst = laConnexion.prepareStatement(sql);
+            state.execute(sql);
             
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
                     "Problème rencontré : " + e.getMessage(),
                     "Résultat", JOptionPane.ERROR_MESSAGE);
         }
-        return rs; 
+
     }
     
     

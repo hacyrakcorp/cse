@@ -29,8 +29,8 @@ public abstract class ConnexionControleur {
         try {
             Class.forName(lesParametres.getDriverSGBD());
             etatConnexion = true;
-            JOptionPane.showMessageDialog(null,
-                    "OK");
+           /* JOptionPane.showMessageDialog(null,
+                    "OK");*/
         } catch (ClassNotFoundException ex) {
            /* JOptionPane.showMessageDialog(null,
                     "Classe non trouvée pour le chargement du pilote JDBC Mysql",

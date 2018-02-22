@@ -4,10 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/UwAmp/www/cse/src/Modele/ConnexionParametres.java</file>
-            <file>file:/C:/UwAmp/www/cse/src/Controleur/connexion/ConnexionControleur.java</file>
             <file>file:/C:/UwAmp/www/cse/src/Modele/Utilisateur.java</file>
+            <file>file:/C:/UwAmp/www/cse/src/Vue/FenMenuPrincipal.java</file>
+            <file>file:/C:/UwAmp/www/cse/src/Vue/JIFFilière.java</file>
+            <file>file:/C:/UwAmp/www/cse/src/Modele/Filiere.java</file>
             <file>file:/C:/UwAmp/www/cse/src/Controleur/connexion/AuthentificationControleur.java</file>
             <file>file:/C:/UwAmp/www/cse/src/Modele/Statut.java</file>
+            <file>file:/C:/UwAmp/www/cse/src/Modele/Eleve.java</file>
+            <file>file:/C:/UwAmp/www/cse/src/Modele/Promotion.java</file>
             <file>file:/C:/UwAmp/www/cse/src/Vue/FenConnexion.java</file>
         </group>
     </open-files>

@@ -102,8 +102,8 @@ public class Utilisateur {
         return tab;
     }
 
-    public static ArrayList getById(int id) {
-        ArrayList tab = new ArrayList();
+    public static Utilisateur getById(int id) {
+        Utilisateur obj = new Utilisateur();
         try {
             String sql = "SELECT * "
                     + "FROM utilisateur "
@@ -111,14 +111,12 @@ public class Utilisateur {
             ResultSet rs = ConnexionParametres.requeter(sql);
             if (rs != null) {
                 while (rs.next()) {
-                    Utilisateur obj = new Utilisateur();
                     obj.setId(rs.getInt("id"));
                     obj.setNom(rs.getString("nom"));
                     obj.setPrenom(rs.getString("prenom"));
                     obj.setMdp(rs.getString("motDePasse"));
                     obj.setId_statut(Statut.getById(rs.getInt("id_Statut")));
-                    
-                    tab.add(obj);
+                   
                 }
                 rs.close();
             }
@@ -128,7 +126,7 @@ public class Utilisateur {
                     "Problème rencontré : " + e.getMessage(),
                     "Résultat", JOptionPane.ERROR_MESSAGE);
         }
-        return tab;
+        return obj;
     }
     
     public static Utilisateur getByLogin(String login) {
@@ -170,13 +168,6 @@ public class Utilisateur {
             System.out.println(x.getNom());
         }
 
-        ArrayList<Utilisateur> user1 = Utilisateur.getById(1);
-        
-        for (Utilisateur x : user1) {//foreach JAVA
-            System.out.println(x.getPrenom());
-            System.out.println(x.getNom());
-            System.out.println(x.getId_statut().getId());    
-        }
 
     }
 
