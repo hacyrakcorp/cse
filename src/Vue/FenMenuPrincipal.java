@@ -6,6 +6,7 @@
 package Vue;
 
 import Controleur.connexion.AdministrateurControleur;
+import java.awt.Font;
 
 /**
  *
@@ -18,6 +19,19 @@ public class FenMenuPrincipal extends javax.swing.JFrame {
      */
     public FenMenuPrincipal() {
         initComponents();
+        jMenu_Admin.setFont(new Font ("Arial",Font.BOLD,20));
+        jMenu_Utilisateurs.setFont(new Font ("Arial",Font.PLAIN,20));
+        jMenuItem_Formateurs.setFont(new Font ("Arial",Font.PLAIN,20));
+        jMenuItem_Etudiants.setFont(new Font ("Arial",Font.PLAIN,20));
+        jMenuItem_Filières.setFont(new Font ("Arial",Font.PLAIN,20));
+        jMenu_RF.setFont(new Font ("Arial",Font.BOLD,20));
+        jMenu_ListeApprentis.setFont(new Font ("Arial",Font.PLAIN,20));
+        jMenu_Autre.setFont(new Font ("Arial",Font.BOLD,20));
+        jMenuItem_Quitter.setFont(new Font ("Arial",Font.PLAIN,20));
+        this.setDefaultLookAndFeelDecorated(true);
+        this.setExtendedState(this.MAXIMIZED_BOTH);
+       // this.add(jDesktopPane_Principal,border_layout.CENTER);
+       jDesktopPane_Principal.setSize(this.MAXIMIZED_HORIZ, this.MAXIMIZED_VERT);
     }
 
     /**
@@ -43,17 +57,25 @@ public class FenMenuPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CONSEIL DE SECTION");
+        setMaximumSize(new java.awt.Dimension(1280, 800));
+        setMinimumSize(new java.awt.Dimension(1280, 800));
+        setPreferredSize(new java.awt.Dimension(1280, 800));
+        setSize(new java.awt.Dimension(1280, 800));
 
         javax.swing.GroupLayout jDesktopPane_PrincipalLayout = new javax.swing.GroupLayout(jDesktopPane_Principal);
         jDesktopPane_Principal.setLayout(jDesktopPane_PrincipalLayout);
         jDesktopPane_PrincipalLayout.setHorizontalGroup(
             jDesktopPane_PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 999, Short.MAX_VALUE)
+            .addGap(0, 989, Short.MAX_VALUE)
         );
         jDesktopPane_PrincipalLayout.setVerticalGroup(
             jDesktopPane_PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 778, Short.MAX_VALUE)
+            .addGap(0, 726, Short.MAX_VALUE)
         );
+
+        jMenuBar_Principal.setBackground(new java.awt.Color(51, 153, 255));
+        jMenuBar_Principal.setMaximumSize(new java.awt.Dimension(1280, 800));
+        jMenuBar_Principal.setMinimumSize(new java.awt.Dimension(1280, 800));
 
         jMenu_Admin.setText("Administrateur");
 
@@ -68,6 +90,11 @@ public class FenMenuPrincipal extends javax.swing.JFrame {
         jMenu_Utilisateurs.add(jMenuItem_Formateurs);
 
         jMenuItem_Etudiants.setText("Gestion des étudiants");
+        jMenuItem_Etudiants.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_EtudiantsActionPerformed(evt);
+            }
+        });
         jMenu_Utilisateurs.add(jMenuItem_Etudiants);
 
         jMenu_Admin.add(jMenu_Utilisateurs);
@@ -113,15 +140,15 @@ public class FenMenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jDesktopPane_Principal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDesktopPane_Principal)
+                .addGap(1, 1, 1))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane_Principal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
+                .addComponent(jDesktopPane_Principal)
+                .addGap(2, 2, 2))
         );
 
         setSize(new java.awt.Dimension(1016, 839));
@@ -151,6 +178,13 @@ public class FenMenuPrincipal extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jMenuItem_FilièresActionPerformed
+
+    private void jMenuItem_EtudiantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_EtudiantsActionPerformed
+        // TODO add your handling code here:
+        JIFEtudiant laFenetreInterne = new JIFEtudiant();
+        jDesktopPane_Principal.add(laFenetreInterne);
+        laFenetreInterne.setVisible(true);
+    }//GEN-LAST:event_jMenuItem_EtudiantsActionPerformed
 
 
     //Définition de l'ensemble des variables

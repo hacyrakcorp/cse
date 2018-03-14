@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package Controleur.connexion;
+import Modele.Eleve;
 import javax.swing.*;
 import Modele.Filiere;
+import Modele.Promotion;
 import Vue.JIFFilière;
 import java.util.ArrayList;
 /**
@@ -15,6 +17,14 @@ import java.util.ArrayList;
 public class AdministrateurControleur {
     public static ArrayList ListeFiliere(){
         return Filiere.getAllList(); 
+    }
+    
+    public static ArrayList ListePromotion(){
+        return Promotion.getAllList(); 
+    }
+    
+    public static ArrayList ListeEtudiant() {
+        return Eleve.getAllList();
     }
     
     public static void AjouterFiliere(String nomFiliere, JIFFilière fen){
