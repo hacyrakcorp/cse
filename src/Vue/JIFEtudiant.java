@@ -11,14 +11,12 @@ import Modele.ChoisirFiliere;
 import Modele.Eleve;
 import Modele.Filiere;
 import Modele.Promotion;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -95,26 +93,12 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
         for (String ligne : lignes) {
             nbLignes += 1;
         }
-        System.out.println(nbLignes);
         //taille d'une ligne dans le tableau
         int tailleLigne = 0;
         for (int i = 0; i<nbLignes;i++){
             tailleLigne += 26;
         }
-        System.out.println(tailleLigne);
         return tailleLigne;
-    }
-
-    private void updateRowHeights() {
-        for (int row = 0; row < jTableEtudiant.getRowCount(); row++) {
-            int rowHeight = jTableEtudiant.getRowHeight();
-
-            for (int column = 0; column < jTableEtudiant.getColumnCount(); column++) {
-                Component comp = jTableEtudiant.prepareRenderer(jTableEtudiant.getCellRenderer(row, column), row, column);
-                rowHeight = Math.max(rowHeight, comp.getPreferredSize().height);
-            }
-            jTableEtudiant.setRowHeight(row, rowHeight);
-        }
     }
 
     public void comboFiliere() {
@@ -154,6 +138,16 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
         jFiltrePromotion = new javax.swing.JComboBox<>();
         jBtnAjouter = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jIdEtu = new javax.swing.JTextField();
+        jNom = new javax.swing.JTextField();
+        jPrenom = new javax.swing.JTextField();
+        jFiliere = new javax.swing.JComboBox<>();
+        jPromotion = new javax.swing.JComboBox<>();
+        jAge = new javax.swing.JTextField();
+        jNumRue = new javax.swing.JTextField();
+        jRue = new javax.swing.JTextField();
+        jCP = new javax.swing.JTextField();
+        jVille = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableEtudiant = new javax.swing.JTable();
@@ -178,7 +172,7 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
 
         jFiltrePromotion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jBtnAjouter.setText("Ajouter un utilisateur");
+        jBtnAjouter.setText("Ajouter un étudiant");
 
         javax.swing.GroupLayout jPanelFiltreLayout = new javax.swing.GroupLayout(jPanelFiltre);
         jPanelFiltre.setLayout(jPanelFiltreLayout);
@@ -221,6 +215,47 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
         getContentPane().add(jPanelFiltre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 830, 240));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jIdEtu.setText("Id");
+        jIdEtu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jIdEtuActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jIdEtu);
+
+        jNom.setText("Nom");
+        jNom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jNomActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jNom);
+
+        jPrenom.setText("Prenom");
+        jPanel3.add(jPrenom);
+
+        jFiliere.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel3.add(jFiliere);
+
+        jPromotion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel3.add(jPromotion);
+
+        jAge.setText("Age");
+        jPanel3.add(jAge);
+
+        jNumRue.setText("N°");
+        jPanel3.add(jNumRue);
+
+        jRue.setText("Rue");
+        jPanel3.add(jRue);
+
+        jCP.setText("jCP");
+        jPanel3.add(jCP);
+
+        jVille.setText("Ville");
+        jPanel3.add(jVille);
+
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 10, 880, 880));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -246,6 +281,11 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTableEtudiant.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableEtudiantMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(jTableEtudiant);
@@ -283,18 +323,55 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
         setBounds(0, 0, 1774, 956);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNomActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jNomActionPerformed
+
+    private void jIdEtuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jIdEtuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jIdEtuActionPerformed
+
+    private void jTableEtudiantMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableEtudiantMouseClicked
+        // TODO add your handling code here:
+        JTable source = (JTable)evt.getSource();
+            int row = source.rowAtPoint( evt.getPoint() );
+            int iduser = Integer.parseInt(jTableEtudiant.getValueAt(row,0).toString());
+            
+            Eleve selected = AdministrateurControleur.SelectedEtudiant(iduser);
+            jIdEtu.setText(Integer.toString(selected.getUser().getId()));
+            jNom.setText(selected.getUser().getNom());
+            jPrenom.setText(selected.getUser().getPrenom());
+            jAge.setText(Integer.toString(selected.getAge()));
+            jNumRue.setText(Integer.toString(selected.getNumRue()));
+            jRue.setText(selected.getLibelleRue());
+            jCP.setText(Integer.toString(selected.getCodePostal()));
+            jVille.setText(selected.getVille());
+            
+            
+    }//GEN-LAST:event_jTableEtudiantMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField jAge;
     private javax.swing.JButton jBtnAjouter;
     private javax.swing.JButton jBtnValider;
+    private javax.swing.JTextField jCP;
+    private javax.swing.JComboBox<String> jFiliere;
     private javax.swing.JComboBox<String> jFiltreFiliere;
     private javax.swing.JComboBox<String> jFiltrePromotion;
+    private javax.swing.JTextField jIdEtu;
     private javax.swing.JLabel jLabelFiltre;
     private javax.swing.JLabel jLabelNom;
+    private javax.swing.JTextField jNom;
+    private javax.swing.JTextField jNumRue;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelFiltre;
+    private javax.swing.JTextField jPrenom;
+    private javax.swing.JComboBox<String> jPromotion;
+    private javax.swing.JTextField jRue;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableEtudiant;
     private javax.swing.JTextField jTextNom;
+    private javax.swing.JTextField jVille;
     // End of variables declaration//GEN-END:variables
 }

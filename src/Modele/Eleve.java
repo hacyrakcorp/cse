@@ -133,6 +133,35 @@ public class Eleve extends Utilisateur {
         return tab;
     }
     
+    public static Eleve getById(int id) {
+        Eleve obj = new Eleve();
+        try {
+            String sql = "SELECT * "
+                    + "FROM eleve "
+                    + "WHERE id = " + id;
+            ResultSet rs = ConnexionParametres.requeter(sql);
+            if (rs != null) {
+                while (rs.next()) {
+                    obj.setUser(Utilisateur.getById(rs.getInt("id")));
+                    obj.setFiliere(ChoisirFiliere.getByUtilisateur(rs.getInt("id")));
+                    obj.setPromo(AppartenirPromotion.getByUtilisateur(rs.getInt("id"))); 
+                    obj.setAge(rs.getInt("age"));
+                    obj.setNumRue(rs.getInt("numRue"));
+                    obj.setLibelleRue(rs.getString("libelleRue"));
+                    obj.setVille(rs.getString("ville"));
+                    obj.setCodePostal(rs.getInt("codePostal"));                
+                }
+                rs.close();
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return obj;
+    }
+    
     public static void main(String[] args) {
         Eleve user = new Eleve();
 

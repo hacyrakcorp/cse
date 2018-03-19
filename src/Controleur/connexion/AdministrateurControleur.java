@@ -8,6 +8,7 @@ import Modele.Eleve;
 import javax.swing.*;
 import Modele.Filiere;
 import Modele.Promotion;
+import Modele.Utilisateur;
 import Vue.JIFFilière;
 import java.util.ArrayList;
 /**
@@ -64,5 +65,11 @@ public class AdministrateurControleur {
                     "Impossible de supprimer la filière",
                     "Résultat", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    public static Eleve SelectedEtudiant(int iduser) {
+        Eleve selected = new Eleve();
+        selected = Eleve.getById(iduser);
+        return selected;
     }
 }
