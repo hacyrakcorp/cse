@@ -4,61 +4,65 @@
  * and open the template in the editor.
  */
 package Controleur.connexion;
+
 import Modele.Eleve;
 import javax.swing.*;
 import Modele.Filiere;
 import Modele.Promotion;
 import Modele.Utilisateur;
+import Vue.JIFEtudiant;
 import Vue.JIFFilière;
 import java.util.ArrayList;
+
 /**
  *
  * @author Cécile
  */
 public class AdministrateurControleur {
-    public static ArrayList ListeFiliere(){
-        return Filiere.getAllList(); 
+
+    public static ArrayList ListeFiliere() {
+        return Filiere.getAllList();
     }
-    
-    public static ArrayList ListePromotion(){
-        return Promotion.getAllList(); 
+
+    public static ArrayList ListePromotion() {
+        return Promotion.getAllList();
     }
-    
+
     public static ArrayList ListeEtudiant() {
         return Eleve.getAllList();
     }
-    
-    public static void AjouterFiliere(String nomFiliere, JIFFilière fen){
-        if (!nomFiliere.equals("") && !nomFiliere.equals("Nouvelle Filiere")){
-            if (Filiere.getByLibelle(nomFiliere.toUpperCase()).getLibelle() == null){
-               if (Filiere.creerFiliere(nomFiliere.toUpperCase()) == true) {
-                   fen.tableauFiliere();
-                   fen.viderNomFiliere();
-               } else {
-                   JOptionPane.showMessageDialog(null,
-                    "La filière n'a pu être enregistrée",
-                    "Résultat", JOptionPane.ERROR_MESSAGE);
-               }
+
+    public static void AjouterFiliere(String nomFiliere, JIFFilière fen) {
+        if (!nomFiliere.equals("") && !nomFiliere.equals("Nouvelle Filiere")) {
+            if (Filiere.getByLibelle(nomFiliere.toUpperCase()).getLibelle() == null) {
+                if (Filiere.creerFiliere(nomFiliere.toUpperCase()) == true) {
+                    fen.tableauFiliere();
+                    fen.viderNomFiliere();
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "La filière n'a pu être enregistrée",
+                            "Résultat", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
                 JOptionPane.showMessageDialog(null,
-                    "La filière existe déjà",
-                    "Résultat", JOptionPane.ERROR_MESSAGE);
+                        "La filière existe déjà",
+                        "Résultat", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(null,
                     "Veuillez remplir le champs",
                     "Résultat", JOptionPane.ERROR_MESSAGE);
-        }   
+        }
     }
-    
-    public static void SupprimerFiliere(int id, JIFFilière fen){
-        if (!Filiere.getById(id).getLibelle().equals(null)){
-            if (Filiere.supprimerFiliere(id) == true){
+
+    public static void SupprimerFiliere(int id, JIFFilière fen) {
+        if (!Filiere.getById(id).getLibelle().equals(null)) {
+            if (Filiere.supprimerFiliere(id) == true) {
                 fen.tableauFiliere();
             } else {
                 JOptionPane.showMessageDialog(null,
-                    "Impossible de supprimer la filière",
-                    "Résultat", JOptionPane.ERROR_MESSAGE);
+                        "Impossible de supprimer la filière",
+                        "Résultat", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(null,
@@ -66,7 +70,20 @@ public class AdministrateurControleur {
                     "Résultat", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    public static void SupprimerEleve(int id, JIFEtudiant fen) {
     
+            if (Eleve.supprimerEleve(id) == true) {
+                //fen.tableauFiliere();
+                System.out.println("ok");
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Impossible de supprimer",
+                        "Résultat", JOptionPane.ERROR_MESSAGE);
+            }
+        
+    }
+
     public static Eleve SelectedEtudiant(int iduser) {
         Eleve selected = new Eleve();
         selected = Eleve.getById(iduser);
