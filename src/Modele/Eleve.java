@@ -32,7 +32,7 @@ public class Eleve extends Utilisateur {
         this.user = user;
     }
 
-    public ArrayList getFiliere() {
+    public ArrayList<ChoisirFiliere> getFiliere() {
         return filiere;
     }
 
@@ -40,7 +40,7 @@ public class Eleve extends Utilisateur {
         this.filiere = filiere;
     }
 
-    public ArrayList getPromo() {
+    public ArrayList<AppartenirPromotion> getPromo() {
         return promo;
     }
 
@@ -160,6 +160,23 @@ public class Eleve extends Utilisateur {
                     "Résultat", JOptionPane.ERROR_MESSAGE);
         }
         return obj;
+    }
+    
+    public static boolean supprimerEleve(int id){
+        boolean ok = false;
+        try {
+            String sql = "DELETE FROM eleve "
+                    + "WHERE id = "+ id;
+            if (ConnexionParametres.executer(sql)) {
+                ok = true;
+            };
+           
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return ok;
     }
     
     public static void main(String[] args) {
