@@ -11,9 +11,12 @@ import Modele.ChoisirFiliere;
 import Modele.Eleve;
 import Modele.Filiere;
 import Modele.Promotion;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -60,6 +63,10 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
             for (ChoisirFiliere s : tabFiliere) {
                 listFiliere += s.getFiliere().getLibelle() + System.getProperty("line.separator");
             }
+            //Multiligne
+            JLabel test = new JLabel();
+            String listFiliereBr = listFiliere.replace("\n","<br>");
+            test.setText("<html>" + listFiliereBr + "</html>");
             //Recupere la liste des promotions de l'élève
             ArrayList<AppartenirPromotion> tabPromo = liste.get(i).getPromo();
             String listPromo = "";
@@ -72,9 +79,41 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
                 liste.get(i).getUser().getNom(),
                 liste.get(i).getUser().getPrenom(),
                 liste.get(i).getFiliere(),
-                listFiliere.substring(0, listFiliere.length() - 2), //moins le '; ' final
+                test.getText(), // multiligne
+                //listFiliere.substring(0, listFiliere.length() - 2), //moins le '; ' final
                 liste.get(i).getPromo(),
                 listPromo.substring(0, listPromo.length() - 2),});
+            //Adpater la taille des lignes
+            jTableEtudiant.setRowHeight(calculHauteur(test.getText()));
+        }
+    }
+    
+    private int calculHauteur(String s) {
+        //nombre de lignes dans la chaine
+        String[] lignes = s.split("<br>");
+        int nbLignes = 0;
+        for (String ligne : lignes) {
+            nbLignes += 1;
+        }
+        System.out.println(nbLignes);
+        //taille d'une ligne dans le tableau
+        int tailleLigne = 0;
+        for (int i = 0; i<nbLignes;i++){
+            tailleLigne += 26;
+        }
+        System.out.println(tailleLigne);
+        return tailleLigne;
+    }
+
+    private void updateRowHeights() {
+        for (int row = 0; row < jTableEtudiant.getRowCount(); row++) {
+            int rowHeight = jTableEtudiant.getRowHeight();
+
+            for (int column = 0; column < jTableEtudiant.getColumnCount(); column++) {
+                Component comp = jTableEtudiant.prepareRenderer(jTableEtudiant.getCellRenderer(row, column), row, column);
+                rowHeight = Math.max(rowHeight, comp.getPreferredSize().height);
+            }
+            jTableEtudiant.setRowHeight(row, rowHeight);
         }
     }
 
@@ -86,7 +125,7 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
             jFiltreFiliere.addItem(x.getLibelle());
         }
     }
-    
+
     public void comboPromo() {
         jFiltrePromotion.removeAllItems();
         jFiltrePromotion.addItem("");

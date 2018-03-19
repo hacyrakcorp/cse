@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Lun 19 Février 2018 à 10:43
+-- Généré le :  Lun 19 Mars 2018 à 09:40
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.1.10
 
@@ -31,6 +31,14 @@ CREATE TABLE `appartenirpromotion` (
   `id_Utilisateur` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `appartenirpromotion`
+--
+
+INSERT INTO `appartenirpromotion` (`id`, `id_Utilisateur`) VALUES
+(2, 3),
+(1, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -56,6 +64,15 @@ CREATE TABLE `choisirfiliere` (
   `id` int(11) NOT NULL,
   `id_Filiere` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `choisirfiliere`
+--
+
+INSERT INTO `choisirfiliere` (`id`, `id_Filiere`) VALUES
+(3, 1),
+(4, 1),
+(3, 2);
 
 -- --------------------------------------------------------
 
@@ -83,6 +100,14 @@ CREATE TABLE `eleve` (
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `eleve`
+--
+
+INSERT INTO `eleve` (`age`, `numRue`, `libelleRue`, `ville`, `codePostal`, `id`) VALUES
+(18, 42, 'rue du test', 'Vitrolles', 13127, 3),
+(27, 62, 'rue du test', 'Plan d\'Orgon', 13750, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -93,6 +118,19 @@ CREATE TABLE `filiere` (
   `id` int(11) NOT NULL,
   `libelle` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `filiere`
+--
+
+INSERT INTO `filiere` (`id`, `libelle`) VALUES
+(1, 'BTS SIO SLAM'),
+(2, 'BTS SIO SISR'),
+(3, 'BTS TC'),
+(4, 'M2I'),
+(6, 'BTS AERO'),
+(7, 'BTS COMPTA'),
+(9, 'BTS BIOTECHNOLOGIE');
 
 -- --------------------------------------------------------
 
@@ -136,6 +174,14 @@ CREATE TABLE `promotion` (
   `annee` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `promotion`
+--
+
+INSERT INTO `promotion` (`id`, `annee`) VALUES
+(1, 2016),
+(2, 2017);
+
 -- --------------------------------------------------------
 
 --
@@ -176,8 +222,8 @@ CREATE TABLE `utilisateur` (
   `id` int(11) NOT NULL,
   `nom` varchar(50) NOT NULL,
   `prenom` varchar(50) NOT NULL,
-  `motDePasse` varchar(25) NOT NULL,
-  `id_Statut` int(11) NOT NULL
+  `motDePasse` varchar(25) DEFAULT NULL,
+  `id_Statut` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -186,7 +232,9 @@ CREATE TABLE `utilisateur` (
 
 INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `motDePasse`, `id_Statut`) VALUES
 (1, 'Aliaga', 'Cecile', 'cecile', 1),
-(2, 'Miniscloux', 'Anthony', 'anthony', 2);
+(2, 'Miniscloux', 'Anthony', 'anthony', 2),
+(3, 'Test', 'Eleve1', NULL, NULL),
+(4, 'Test', 'Eleve2', NULL, NULL);
 
 --
 -- Index pour les tables exportées
@@ -285,7 +333,7 @@ ALTER TABLE `bulletin`
 -- AUTO_INCREMENT pour la table `filiere`
 --
 ALTER TABLE `filiere`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT pour la table `matiere`
 --
@@ -300,7 +348,7 @@ ALTER TABLE `note`
 -- AUTO_INCREMENT pour la table `promotion`
 --
 ALTER TABLE `promotion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `statut`
 --
@@ -315,7 +363,7 @@ ALTER TABLE `typeevaluation`
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Contraintes pour les tables exportées
 --
