@@ -12,11 +12,13 @@ import Modele.Eleve;
 import Modele.Filiere;
 import Modele.Promotion;
 import java.awt.Font;
+import java.awt.List;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -63,7 +65,7 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
             }
             //Multiligne
             JLabel test = new JLabel();
-            String listFiliereBr = listFiliere.replace("\n","<br>");
+            String listFiliereBr = listFiliere.replace("\n", "<br>");
             test.setText("<html>" + listFiliereBr + "</html>");
             //Recupere la liste des promotions de l'élève
             ArrayList<AppartenirPromotion> tabPromo = liste.get(i).getPromo();
@@ -85,7 +87,7 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
             jTableEtudiant.setRowHeight(calculHauteur(test.getText()));
         }
     }
-    
+
     private int calculHauteur(String s) {
         //nombre de lignes dans la chaine
         String[] lignes = s.split("<br>");
@@ -95,26 +97,32 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
         }
         //taille d'une ligne dans le tableau
         int tailleLigne = 0;
-        for (int i = 0; i<nbLignes;i++){
+        for (int i = 0; i < nbLignes; i++) {
             tailleLigne += 26;
         }
         return tailleLigne;
     }
 
     public void comboFiliere() {
+        jFiliere.removeAllItems();
         jFiltreFiliere.removeAllItems();
+        jFiliere.addItem("");
         jFiltreFiliere.addItem("");
         ArrayList<Filiere> list = AdministrateurControleur.ListeFiliere();
         for (Filiere x : list) {
             jFiltreFiliere.addItem(x.getLibelle());
+            jFiliere.addItem(x.getLibelle());
         }
     }
 
     public void comboPromo() {
+        jPromotion.removeAllItems();
         jFiltrePromotion.removeAllItems();
+        jPromotion.addItem("");
         jFiltrePromotion.addItem("");
         ArrayList<Promotion> list = AdministrateurControleur.ListePromotion();
         for (Promotion x : list) {
+            jPromotion.addItem(Integer.toString(x.getAnnee()));
             jFiltrePromotion.addItem(Integer.toString(x.getAnnee()));
         }
     }
@@ -148,6 +156,12 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
         jRue = new javax.swing.JTextField();
         jCP = new javax.swing.JTextField();
         jVille = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTableFiliere = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTablePromotion = new javax.swing.JTable();
+        jBtnSupprimer = new javax.swing.JButton();
+        jBtnModifier = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableEtudiant = new javax.swing.JTable();
@@ -216,13 +230,13 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
+        jIdEtu.setEditable(false);
         jIdEtu.setText("Id");
         jIdEtu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jIdEtuActionPerformed(evt);
             }
         });
-        jPanel3.add(jIdEtu);
 
         jNom.setText("Nom");
         jNom.addActionListener(new java.awt.event.ActionListener() {
@@ -230,33 +244,121 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
                 jNomActionPerformed(evt);
             }
         });
-        jPanel3.add(jNom);
 
         jPrenom.setText("Prenom");
-        jPanel3.add(jPrenom);
 
         jFiliere.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(jFiliere);
 
         jPromotion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(jPromotion);
 
         jAge.setText("Age");
-        jPanel3.add(jAge);
 
         jNumRue.setText("N°");
-        jPanel3.add(jNumRue);
 
         jRue.setText("Rue");
-        jPanel3.add(jRue);
 
         jCP.setText("jCP");
-        jPanel3.add(jCP);
 
         jVille.setText("Ville");
-        jPanel3.add(jVille);
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 10, 880, 880));
+        jTableFiliere.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Filiere"
+            }
+        ));
+        jScrollPane4.setViewportView(jTableFiliere);
+
+        jTablePromotion.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Promotion"
+            }
+        ));
+        jScrollPane1.setViewportView(jTablePromotion);
+
+        jBtnSupprimer.setText("Supprimer");
+        jBtnSupprimer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnSupprimerMouseClicked(evt);
+            }
+        });
+
+        jBtnModifier.setText("Modifier");
+        jBtnModifier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnModifierActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jIdEtu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jCP)
+                        .addComponent(jNumRue, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jAge, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jNom, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jFiliere, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBtnModifier, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)))
+                .addGap(174, 174, 174)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jBtnSupprimer, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                    .addComponent(jPrenom)
+                    .addComponent(jVille)
+                    .addComponent(jRue)
+                    .addComponent(jPromotion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(135, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jIdEtu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jFiliere, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPromotion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(jPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addComponent(jAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jNumRue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jVille, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnSupprimer)
+                    .addComponent(jBtnModifier))
+                .addContainerGap())
+        );
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 10, 880, 870));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -333,26 +435,67 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
 
     private void jTableEtudiantMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableEtudiantMouseClicked
         // TODO add your handling code here:
-        JTable source = (JTable)evt.getSource();
-            int row = source.rowAtPoint( evt.getPoint() );
-            int iduser = Integer.parseInt(jTableEtudiant.getValueAt(row,0).toString());
-            
-            Eleve selected = AdministrateurControleur.SelectedEtudiant(iduser);
-            jIdEtu.setText(Integer.toString(selected.getUser().getId()));
-            jNom.setText(selected.getUser().getNom());
-            jPrenom.setText(selected.getUser().getPrenom());
-            jAge.setText(Integer.toString(selected.getAge()));
-            jNumRue.setText(Integer.toString(selected.getNumRue()));
-            jRue.setText(selected.getLibelleRue());
-            jCP.setText(Integer.toString(selected.getCodePostal()));
-            jVille.setText(selected.getVille());
-            
-            
+        JTable source = (JTable) evt.getSource();
+        int row = source.rowAtPoint(evt.getPoint());
+        int iduser = Integer.parseInt(jTableEtudiant.getValueAt(row, 0).toString());
+
+        Eleve selected = AdministrateurControleur.SelectedEtudiant(iduser);
+        jIdEtu.setText(Integer.toString(selected.getUser().getId()));
+        jNom.setText(selected.getUser().getNom());
+        jPrenom.setText(selected.getUser().getPrenom());
+        jAge.setText(Integer.toString(selected.getAge()));
+        jNumRue.setText(Integer.toString(selected.getNumRue()));
+        jRue.setText(selected.getLibelleRue());
+        jCP.setText(Integer.toString(selected.getCodePostal()));
+        jVille.setText(selected.getVille());
+        DefaultTableModel model = (DefaultTableModel) jTableFiliere.getModel();
+        model.getDataVector().clear();
+        ArrayList<ChoisirFiliere> liste = selected.getFiliere();
+        //Recupere la liste des filieres d'un étudiant
+        for (int i = 0; i < liste.size(); i++) {
+            model.addRow(new Object[]{
+                    liste.get(i).getFiliere().getLibelle(),
+            });
+        }
+        DefaultTableModel model1 = (DefaultTableModel) jTablePromotion.getModel();
+        model1.getDataVector().clear();
+        ArrayList<AppartenirPromotion> liste1 = selected.getPromo();
+        //Recupere la liste des filieres d'un étudiant
+        for (int i = 0; i < liste1.size(); i++) {
+            model1.addRow(new Object[]{
+                    liste1.get(i).getPromotion().getAnnee()
+            });
+        }
+
+
     }//GEN-LAST:event_jTableEtudiantMouseClicked
+
+    private void jBtnModifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnModifierActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnModifierActionPerformed
+
+    private void jBtnSupprimerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnSupprimerMouseClicked
+        // TODO add your handling code here:
+        int idUser;
+        if (jIdEtu.getText().equals("")){
+            idUser=-1;
+        } else {
+            idUser=Integer.parseInt(jIdEtu.getText());
+        }
+        if (idUser != -1){
+            AdministrateurControleur.SupprimerEleve(idUser, this);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Erreur suppression, sélectionner un élève.",
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBtnSupprimerMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField jAge;
     private javax.swing.JButton jBtnAjouter;
+    private javax.swing.JButton jBtnModifier;
+    private javax.swing.JButton jBtnSupprimer;
     private javax.swing.JButton jBtnValider;
     private javax.swing.JTextField jCP;
     private javax.swing.JComboBox<String> jFiliere;
@@ -369,8 +512,12 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jPrenom;
     private javax.swing.JComboBox<String> jPromotion;
     private javax.swing.JTextField jRue;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTableEtudiant;
+    private javax.swing.JTable jTableFiliere;
+    private javax.swing.JTable jTablePromotion;
     private javax.swing.JTextField jTextNom;
     private javax.swing.JTextField jVille;
     // End of variables declaration//GEN-END:variables
