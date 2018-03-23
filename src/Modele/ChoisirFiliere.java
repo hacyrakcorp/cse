@@ -117,6 +117,24 @@ public class ChoisirFiliere {
         return tab;
     }
     
+    public static boolean supprimer(int user, int filiere){
+        boolean ok = false;
+        try {
+            String sql = "DELETE FROM choisirfiliere "
+                    + "WHERE id = " + user + " "
+                    + "AND id_Filiere = "+ filiere;
+            if (ConnexionParametres.executer(sql)) {
+                ok = true;
+            };
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return ok;
+    }
+    
     public static void main(String[] args){
         ArrayList<ChoisirFiliere> test = ChoisirFiliere.getByUtilisateur(3);
         for (ChoisirFiliere x : test){

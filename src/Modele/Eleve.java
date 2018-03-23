@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
  * @author Cécile
  */
 public class Eleve extends Utilisateur {
+
     Utilisateur user;
     ArrayList filiere;
     ArrayList promo;
@@ -102,20 +103,18 @@ public class Eleve extends Utilisateur {
     public Eleve() {
     }
     
-    public static ArrayList getAllList() {
+    public static ArrayList getAll() {
         ArrayList tab = new ArrayList();
         try {
             String sql = "SELECT * "
-                    + "FROM eleve, choisirfiliere "
-                    + "WHERE eleve.id = choisirfiliere.id "
-                    + "GROUP BY eleve.id";
+                    + "FROM eleve";
             ResultSet rs = ConnexionParametres.requeter(sql);
             if (rs != null) {
                 while (rs.next()) {
                     Eleve obj = new Eleve();
                     obj.setUser(Utilisateur.getById(rs.getInt("id")));
                     obj.setFiliere(ChoisirFiliere.getByUtilisateur(rs.getInt("id")));
-                    obj.setPromo(AppartenirPromotion.getByUtilisateur(rs.getInt("id"))); 
+                    obj.setPromo(AppartenirPromotion.getByUtilisateur(rs.getInt("id")));
                     obj.setAge(rs.getInt("age"));
                     obj.setNumRue(rs.getInt("numRue"));
                     obj.setLibelleRue(rs.getString("libelleRue"));
@@ -132,7 +131,38 @@ public class Eleve extends Utilisateur {
         }
         return tab;
     }
-    
+
+    public static ArrayList getAllList() {
+        ArrayList tab = new ArrayList();
+        try {
+            String sql = "SELECT * "
+                    + "FROM eleve, choisirfiliere "
+                    + "WHERE eleve.id = choisirfiliere.id "
+                    + "GROUP BY eleve.id";
+            ResultSet rs = ConnexionParametres.requeter(sql);
+            if (rs != null) {
+                while (rs.next()) {
+                    Eleve obj = new Eleve();
+                    obj.setUser(Utilisateur.getById(rs.getInt("id")));
+                    obj.setFiliere(ChoisirFiliere.getByUtilisateur(rs.getInt("id")));
+                    obj.setPromo(AppartenirPromotion.getByUtilisateur(rs.getInt("id")));
+                    obj.setAge(rs.getInt("age"));
+                    obj.setNumRue(rs.getInt("numRue"));
+                    obj.setLibelleRue(rs.getString("libelleRue"));
+                    obj.setVille(rs.getString("ville"));
+                    obj.setCodePostal(rs.getInt("codePostal"));
+                    tab.add(obj);
+                }
+            }
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return tab;
+    }
+
     public static Eleve getById(int id) {
         Eleve obj = new Eleve();
         try {
@@ -144,12 +174,12 @@ public class Eleve extends Utilisateur {
                 while (rs.next()) {
                     obj.setUser(Utilisateur.getById(rs.getInt("id")));
                     obj.setFiliere(ChoisirFiliere.getByUtilisateur(rs.getInt("id")));
-                    obj.setPromo(AppartenirPromotion.getByUtilisateur(rs.getInt("id"))); 
+                    obj.setPromo(AppartenirPromotion.getByUtilisateur(rs.getInt("id")));
                     obj.setAge(rs.getInt("age"));
                     obj.setNumRue(rs.getInt("numRue"));
                     obj.setLibelleRue(rs.getString("libelleRue"));
                     obj.setVille(rs.getString("ville"));
-                    obj.setCodePostal(rs.getInt("codePostal"));                
+                    obj.setCodePostal(rs.getInt("codePostal"));
                 }
                 rs.close();
             }
@@ -161,16 +191,35 @@ public class Eleve extends Utilisateur {
         }
         return obj;
     }
-    
-    public static boolean supprimerEleve(int id){
+
+    public static boolean supprimerEleve(int id) {
         boolean ok = false;
         try {
             String sql = "DELETE FROM eleve "
-                    + "WHERE id = "+ id;
+                    + "WHERE id = " + id;
             if (ConnexionParametres.executer(sql)) {
                 ok = true;
             };
-           
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return ok;
+    }
+
+    public static boolean ajouterEleve(int age, int numero, String rue,
+            String ville, int CP, int user) {
+        boolean ok = false;
+        try {
+            String sql = "INSERT INTO eleve "
+                    + "VALUES (" + age + "," + numero + ",'" + rue + "',"
+                    + "'" + ville + "'," + CP + "," + user + ")";
+            if (ConnexionParametres.executer(sql)) {
+                ok = true;
+            };
+
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
                     "Problème rencontré : " + e.getMessage(),
@@ -179,6 +228,23 @@ public class Eleve extends Utilisateur {
         return ok;
     }
     
+    public static boolean ajouterEleve(int user) {
+        boolean ok = false;
+        try {
+            String sql = "INSERT INTO eleve (id) "
+                    + "VALUES (" + user + ")";
+            if (ConnexionParametres.executer(sql)) {
+                ok = true;
+            };
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return ok;
+    }
+
     public static void main(String[] args) {
         Eleve user = new Eleve();
 
@@ -186,7 +252,7 @@ public class Eleve extends Utilisateur {
         tabUser = user.getAllList();
 
         System.out.println(tabUser);
-        
+
         for (Eleve x : tabUser) {//foreach JAVA
             System.out.println(x.getUser().getPrenom());
             System.out.println(x.getUser().getNom());
@@ -194,7 +260,7 @@ public class Eleve extends Utilisateur {
             System.out.println(x.getVille());
             ArrayList<ChoisirFiliere> tabFil = new ArrayList<ChoisirFiliere>();
             tabFil = x.getFiliere();
-            for (ChoisirFiliere y : tabFil){
+            for (ChoisirFiliere y : tabFil) {
                 System.out.println(y.getFiliere().getLibelle());
             }
             ArrayList<AppartenirPromotion> tabPromo = new ArrayList<AppartenirPromotion>();
@@ -202,7 +268,7 @@ public class Eleve extends Utilisateur {
             for (AppartenirPromotion z : tabPromo) {
                 System.out.println(z.getPromotion().getAnnee());
             }
-           // System.out.println(x.getFiliere());
+            // System.out.println(x.getFiliere());
         }
     }
 }
