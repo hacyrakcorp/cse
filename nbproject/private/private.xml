@@ -3,12 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/UwAmp/www/cse/src/Modele/ConnexionParametres.java</file>
             <file>file:/C:/UwAmp/www/cse/src/Modele/Utilisateur.java</file>
             <file>file:/C:/UwAmp/www/cse/src/Vue/JIFEtudiant.java</file>
             <file>file:/C:/UwAmp/www/cse/src/Modele/ChoisirFiliere.java</file>
             <file>file:/C:/UwAmp/www/cse/src/Controleur/connexion/AdministrateurControleur.java</file>
             <file>file:/C:/UwAmp/www/cse/src/Modele/Eleve.java</file>
+=======
+            <file>file:/C:/Users/aminiscloux/Documents/GitHub/cse/src/Vue/JIFEtudiant.java</file>
+            <file>file:/C:/Users/aminiscloux/Documents/GitHub/cse/src/Vue/JIFVueBulletin.java</file>
+            <file>file:/C:/Users/aminiscloux/Documents/GitHub/cse/src/Vue/JIFFormateur.java</file>
+            <file>file:/C:/Users/aminiscloux/Documents/GitHub/cse/src/Controleur/connexion/AdministrateurControleur.java</file>
+>>>>>>> b0fb2219732b44579fa95d9d9df5cb77a1f5eb6d
         </group>
     </open-files>
 </project-private>
