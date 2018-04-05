@@ -90,5 +90,29 @@ public class Promotion {
         }
         return obj;
     }
+    
+    public static Promotion getByLibelle(String libelle){
+        Promotion obj = new Promotion();
+        
+        try {
+            String sql = "SELECT * "
+                    + "FROM promotion "
+                    + "WHERE annee = "+libelle;
+            ResultSet rs = ConnexionParametres.requeter(sql);
+            if (rs != null) {
+                while (rs.next()) {      
+                  
+                    obj.setId(rs.getInt("id"));
+                    obj.setAnnee(rs.getInt("annee"));
+                }
+            }
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return obj;
+    }
 
 }

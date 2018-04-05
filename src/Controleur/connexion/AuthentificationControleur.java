@@ -23,20 +23,20 @@ public class AuthentificationControleur {
             //Si on recupere un Utilisateur
             if (Utilisateur.getByLogin(login) != null) {
                 //Si mdp correct
-                if (!Utilisateur.getByLogin(login).getMdp().equals("")){
-                if (Utilisateur.getByLogin(login).getMdp().equals(mdp)) {
-                    //Récupere le statut (getById_statut)
-                    
-                    //Rediriger vers la fenetre correspondante
-                    FenMenuPrincipal laFenetre = new FenMenuPrincipal();
-                    laFenetre.setVisible(true);
-                    fenCo.dispose();
+                if (!Utilisateur.getByLogin(login).getMdp().equals("")) {
+                    if (Utilisateur.getByLogin(login).getMdp().equals(mdp)) {
+                        //Récupere le statut (getById_statut)
 
-                } else { // Erreur mdp
-                    JOptionPane.showMessageDialog(null,
-                            "Identifiants incorrects. Ré-essayer !",
-                            "Résultat", JOptionPane.ERROR_MESSAGE);
-                }
+                        //Rediriger vers la fenetre correspondante
+                        FenMenuPrincipal laFenetre = new FenMenuPrincipal();
+                        laFenetre.setVisible(true);
+                        fenCo.dispose();
+
+                    } else { // Erreur mdp
+                        JOptionPane.showMessageDialog(null,
+                                "Identifiants incorrects. Ré-essayer !",
+                                "Résultat", JOptionPane.ERROR_MESSAGE);
+                    }
                 } else {//Statut eleve
                     JOptionPane.showMessageDialog(null,
                             "Interdiction de se connecter",

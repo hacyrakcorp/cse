@@ -116,4 +116,22 @@ public class AppartenirPromotion {
         }
         return tab;
     }
+    
+    public static boolean ajouter(Utilisateur user, Promotion promo){
+        boolean res = false;
+        try {
+            String sql = "INSERT INTO appartenirpromotion "
+                    + "VALUES ( "+promo.getId()+", "+user.getId()+")";
+            if (ConnexionParametres.executer(sql)) {
+                
+                res = true;
+            };
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return res;
+    }
+    
 }

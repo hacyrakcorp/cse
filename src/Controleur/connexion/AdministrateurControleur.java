@@ -5,6 +5,7 @@
  */
 package Controleur.connexion;
 
+import Modele.AppartenirPromotion;
 import Modele.ChoisirFiliere;
 import Modele.Eleve;
 import javax.swing.*;
@@ -95,30 +96,48 @@ public class AdministrateurControleur {
     }
 
     public static void AjouterEleve(String nom, String prenom, String sAge, String sNum, String rue, String sCp, String ville, JTable filiere, JTable promotion, JIFEtudiant fen) throws SQLException {
-        //int user = Utilisateur.dernierID();
-        //int age = Integer.parseInt(sAge);
-        //int num = Integer.parseInt(sNum);
-        //int cp = Integer.parseInt(sCp);
-        DefaultTableModel model = (DefaultTableModel) filiere.getModel();
-        for (int i = 0; i < model.getRowCount(); i++) {
-            System.out.println(i);
-            System.out.println(model.getValueAt(i, 0));
-            //Filiere test = Filiere.getByLibelle(model.getValueAt(i, 0).toString());
-            //System.out.println(test);
-        }
-
-        /* if (Eleve.ajouterUtilisateur(nom, prenom, Statut.ELEVE) == true) {
+       
+        if (Eleve.ajouterUtilisateur(nom, prenom, Statut.ELEVE) == true) {
             int user = Utilisateur.dernierID();
-            int age = Integer.parseInt(sAge);
-            int num = Integer.parseInt(sNum);
-            int cp = Integer.parseInt(sCp);
+            Utilisateur utilisateur = Utilisateur.getById(user);
+            int age = 0;
+            if (!sAge.equals("")){
+                age = Integer.parseInt(sAge);
+            } 
+            int num = 0;
+            if (!sNum.equals("")){
+             num = Integer.parseInt(sNum);
+            }
+            int cp = 0;
+            if (!sCp.equals("")){
+                cp = Integer.parseInt(sCp);
+            }
             DefaultTableModel model = (DefaultTableModel) filiere.getModel();
             for (int i = 0; i<filiere.getRowCount(); i++){
-                Filiere test = Filiere.getByLibelle(model.getValueAt(i, 0).toString());
+                Filiere uneFiliere = Filiere.getByLibelle(model.getValueAt(i, 0).toString());
+                //Ajouter filiere
+                if (ChoisirFiliere.ajouter(utilisateur, uneFiliere)){
+                    //System.out.println("ok");
+                }else {
+                    JOptionPane.showMessageDialog(null,
+                        "Erreur lors de l'ajout de la filiere",
+                        "Résultat", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            DefaultTableModel mod = (DefaultTableModel) promotion.getModel();
+            for (int i = 0; i<promotion.getRowCount(); i++){
+                Promotion unePromo = Promotion.getByLibelle(mod.getValueAt(i, 0).toString());
+                //Ajouter promotion
+                if (AppartenirPromotion.ajouter(utilisateur, unePromo)){
+                   //System.out.println("ok");
+                }else {
+                    JOptionPane.showMessageDialog(null,
+                        "Erreur lors de l'ajout de la promotion",
+                        "Résultat", JOptionPane.ERROR_MESSAGE);
+                }
             }
             
-            
-            if (Eleve.ajouterEleve(user)) {
+            if (Eleve.ajouterEleve(age, num, rue, ville, cp, user)) {
                 JOptionPane.showMessageDialog(null,
                         "Ajout de l'élève réussi.",
                         "Résultat", JOptionPane.ERROR_MESSAGE);
@@ -132,7 +151,7 @@ public class AdministrateurControleur {
             JOptionPane.showMessageDialog(null,
                     "Impossible d'ajouter l'utilisateur",
                     "Résultat", JOptionPane.ERROR_MESSAGE);
-        }*/
+        }
     }
 
     public static Eleve SelectedEtudiant(int iduser) {

@@ -117,6 +117,50 @@ public class ChoisirFiliere {
         return tab;
     }
     
+    public static boolean ajouter(Utilisateur user, Filiere filiere){
+        boolean res = false;
+        try {
+            String sql = "INSERT INTO choisirfiliere "
+                    + "VALUES ( "+user.getId()+", "+filiere.getId()+")";
+            if (ConnexionParametres.executer(sql)) {
+                res = true;
+            };
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return res;
+    }
+    
+    public static boolean supprimerByUser(Utilisateur user){
+        boolean res = false;
+        try{
+            //Récupère toutes les filieres d'un utilisateur
+            String sql = "SELECT * FROM choisirfiliere"
+                    + "WHERE id = "+user.getId();
+            ResultSet rs = ConnexionParametres.requeter(sql);
+            if (rs != null) {
+                //Tant qu'il y a des valeurs
+                while (rs.next()) {
+                    String sql2 = "DELETE FROM choisirfiliere"
+                            + "WHERE id = "+user.getId();
+                    if (ConnexionParametres.executer(sql2)) {
+                        res = true;
+                    } else {
+                        res = false;
+                    }
+                }
+            };
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return res;
+        
+    }
+    
     public static boolean supprimer(int user, int filiere){
         boolean ok = false;
         try {
