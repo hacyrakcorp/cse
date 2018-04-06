@@ -162,6 +162,145 @@ public class Eleve extends Utilisateur {
         }
         return tab;
     }
+    
+    public static ArrayList getByNom(String nom) {
+        ArrayList tab = new ArrayList();
+        try {
+            String sql = "SELECT * "
+                    + "FROM eleve, choisirfiliere, utilisateur "
+                    + "WHERE eleve.id = utilisateur.id "
+                    + "AND eleve.id = choisirfiliere.id "
+                    + "AND utilisateur.nom ='"+nom+"' "
+                    + "GROUP BY eleve.id";
+            ResultSet rs = ConnexionParametres.requeter(sql);
+            if (rs != null) {
+                while (rs.next()) {
+                    Eleve obj = new Eleve();
+                    obj.setUser(Utilisateur.getById(rs.getInt("id")));
+                    obj.setFiliere(ChoisirFiliere.getByUtilisateur(rs.getInt("id")));
+                    obj.setPromo(AppartenirPromotion.getByUtilisateur(rs.getInt("id")));
+                    obj.setAge(rs.getInt("age"));
+                    obj.setNumRue(rs.getInt("numRue"));
+                    obj.setLibelleRue(rs.getString("libelleRue"));
+                    obj.setVille(rs.getString("ville"));
+                    obj.setCodePostal(rs.getInt("codePostal"));
+                    tab.add(obj);
+                }
+            }
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return tab;
+    }
+    
+    public static ArrayList getByPromo(String promo) {
+        ArrayList tab = new ArrayList();
+        Promotion promotion = Promotion.getByLibelle(promo);
+        try {
+            String sql = "SELECT * "
+                    + "FROM eleve, choisirfiliere, utilisateur, appartenirpromotion "
+                    + "WHERE eleve.id = utilisateur.id "
+                    + "AND eleve.id = choisirfiliere.id "
+                    + "AND eleve.id = appartenirpromotion.id_Utilisateur "
+                    + "AND appartenirpromotion.id = "+promotion.getId()+" "
+                    + "GROUP BY eleve.id";
+            ResultSet rs = ConnexionParametres.requeter(sql);
+            if (rs != null) {
+                while (rs.next()) {
+                    Eleve obj = new Eleve();
+                    obj.setUser(Utilisateur.getById(rs.getInt("id")));
+                    obj.setFiliere(ChoisirFiliere.getByUtilisateur(rs.getInt("id")));
+                    obj.setPromo(AppartenirPromotion.getByUtilisateur(rs.getInt("id")));
+                    obj.setAge(rs.getInt("age"));
+                    obj.setNumRue(rs.getInt("numRue"));
+                    obj.setLibelleRue(rs.getString("libelleRue"));
+                    obj.setVille(rs.getString("ville"));
+                    obj.setCodePostal(rs.getInt("codePostal"));
+                    tab.add(obj);
+                }
+            }
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return tab;
+    }
+    
+    public static ArrayList getByFiliere(String filiere) {
+        ArrayList tab = new ArrayList();
+        Filiere fil = Filiere.getByLibelle(filiere);
+        try {
+            String sql = "SELECT * "
+                    + "FROM eleve, choisirfiliere, utilisateur, appartenirpromotion "
+                    + "WHERE eleve.id = utilisateur.id "
+                    + "AND eleve.id = choisirfiliere.id "
+                    + "AND choisirfiliere.id_Filiere = "+fil.getId()+" "
+                    + "GROUP BY eleve.id";
+            ResultSet rs = ConnexionParametres.requeter(sql);
+            if (rs != null) {
+                while (rs.next()) {
+                    Eleve obj = new Eleve();
+                    obj.setUser(Utilisateur.getById(rs.getInt("id")));
+                    obj.setFiliere(ChoisirFiliere.getByUtilisateur(rs.getInt("id")));
+                    obj.setPromo(AppartenirPromotion.getByUtilisateur(rs.getInt("id")));
+                    obj.setAge(rs.getInt("age"));
+                    obj.setNumRue(rs.getInt("numRue"));
+                    obj.setLibelleRue(rs.getString("libelleRue"));
+                    obj.setVille(rs.getString("ville"));
+                    obj.setCodePostal(rs.getInt("codePostal"));
+                    tab.add(obj);
+                }
+            }
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return tab;
+    }
+    
+    public static ArrayList getByFilierePromo(String filiere, String promotion) {
+        ArrayList tab = new ArrayList();
+        Filiere fil = Filiere.getByLibelle(filiere);
+        Promotion promo = Promotion.getByLibelle(promotion);
+        try {
+            String sql = "SELECT * "
+                    + "FROM eleve, choisirfiliere, utilisateur, appartenirpromotion "
+                    + "WHERE eleve.id = utilisateur.id "
+                    + "AND eleve.id = choisirfiliere.id "
+                    + "AND eleve.id = appartenirpromotion.id_Utilisateur "
+                    + "AND choisirfiliere.id_Filiere = "+fil.getId()+" "
+                    + "AND appartenirpromotion.id = "+promo.getId()+" "
+                    + "GROUP BY eleve.id";
+            ResultSet rs = ConnexionParametres.requeter(sql);
+            if (rs != null) {
+                while (rs.next()) {
+                    Eleve obj = new Eleve();
+                    obj.setUser(Utilisateur.getById(rs.getInt("id")));
+                    obj.setFiliere(ChoisirFiliere.getByUtilisateur(rs.getInt("id")));
+                    obj.setPromo(AppartenirPromotion.getByUtilisateur(rs.getInt("id")));
+                    obj.setAge(rs.getInt("age"));
+                    obj.setNumRue(rs.getInt("numRue"));
+                    obj.setLibelleRue(rs.getString("libelleRue"));
+                    obj.setVille(rs.getString("ville"));
+                    obj.setCodePostal(rs.getInt("codePostal"));
+                    tab.add(obj);
+                }
+            }
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return tab;
+    }
 
     public static Eleve getById(int id) {
         Eleve obj = new Eleve();
@@ -274,9 +413,14 @@ public class Eleve extends Utilisateur {
     }
 
     public static void main(String[] args) {
-        Eleve eleve = Eleve.getById(5);
-        System.out.println(eleve.getUser().getId());
-        eleve.modifierEleve(eleve.getUser().getId(), 0, 0, 0,
-                "Rue","Ville","Giovanni","Martin");
+        Eleve eleve = new Eleve();
+        ArrayList<Eleve> tab = new ArrayList<Eleve>();
+        tab = Eleve.getByPromo("2017");
+        System.out.println(tab);
+        for (Eleve x : tab){
+            System.out.println(x.getUser().getNom());
+        }
+        
+        
     }
 }

@@ -40,6 +40,24 @@ public class AdministrateurControleur {
     public static ArrayList AllListEtudiant() {
         return Eleve.getAll();
     }
+    
+    public static ArrayList EtudiantFiltre(String filtre, String nom,
+            String filiere, String promo) {
+        switch (filtre){
+            case "" :
+                return Eleve.getAll();
+            case "Nom" :
+                return Eleve.getByNom(nom);
+            case "Promo" :
+                return Eleve.getByPromo(promo);
+            case "Filiere" :
+                return Eleve.getByFiliere(filiere);
+            case "FilierePromo" :
+                return Eleve.getByFilierePromo(filiere,promo);
+            default :
+                return null;
+        }
+    }
 
     public static void AjouterFiliere(String nomFiliere, JIFFilière fen) {
         if (!nomFiliere.equals("") && !nomFiliere.equals("Nouvelle Filiere")) {
@@ -86,7 +104,7 @@ public class AdministrateurControleur {
             JOptionPane.showMessageDialog(null,
                     "Suppression de l'élève réussi.",
                     "Résultat", JOptionPane.ERROR_MESSAGE);
-            fen.tableau();
+            fen.tableau("");
         } else {
             JOptionPane.showMessageDialog(null,
                     "Impossible de supprimer",
@@ -141,7 +159,7 @@ public class AdministrateurControleur {
                 JOptionPane.showMessageDialog(null,
                         "Ajout de l'élève réussi.",
                         "Résultat", JOptionPane.ERROR_MESSAGE);
-                fen.tableau();
+                fen.tableau("");
             } else {
                 JOptionPane.showMessageDialog(null,
                         "Impossible d'ajouter l'élève",
@@ -202,7 +220,7 @@ public class AdministrateurControleur {
                 JOptionPane.showMessageDialog(null,
                         "Modification de l'élève réussi.",
                         "Résultat", JOptionPane.ERROR_MESSAGE);
-                fen.tableau();
+                fen.tableau("");
             } else {
                 JOptionPane.showMessageDialog(null,
                         "Impossible de modifier l'élève",

@@ -11,7 +11,6 @@ import Modele.ChoisirFiliere;
 import Modele.Eleve;
 import Modele.Filiere;
 import Modele.Promotion;
-import Modele.Utilisateur;
 import java.awt.Font;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
     public JIFEtudiant() {
         initComponents();
         this.sizeFont();
-        this.tableau();
+        this.tableau("");
         this.comboFiliere();
         this.comboPromo();
     }
@@ -53,11 +52,65 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
 
     }
 
-    public void tableau() {
+    /*public void tableau() {
         DefaultTableModel model = (DefaultTableModel) jTableEtudiant.getModel();
         model.getDataVector().clear();
         //ArrayList<Eleve> liste = AdministrateurControleur.ListeEtudiant();
         ArrayList<Eleve> liste = AdministrateurControleur.AllListEtudiant();
+        int tailleLigne = 0;
+        for (int i = 0; i < liste.size(); i++) {
+            //Recupere la liste des filieres d'un étudiant
+            ArrayList<ChoisirFiliere> tabFiliere = liste.get(i).getFiliere();
+            String listFiliere = "";
+            for (ChoisirFiliere s : tabFiliere) {
+                listFiliere += s.getFiliere().getLibelle() + System.getProperty("line.separator");
+            }
+            //Multiligne
+            JLabel test = new JLabel();
+            String listFiliereBr = listFiliere.replace("\n", "<br>");
+            test.setText("<html>" + listFiliereBr + "</html>");
+
+            //Recupere la liste des promotions de l'élève
+            ArrayList<AppartenirPromotion> tabPromo = liste.get(i).getPromo();
+            String listPromo = "";
+            for (AppartenirPromotion t : tabPromo) {
+                listPromo += t.getPromotion().getAnnee() + System.getProperty("line.separator");
+            }
+            //Multiligne
+            JLabel test1 = new JLabel();
+            String listPromoBr = listPromo.replace("\n", "<br>");
+            test1.setText("<html>" + listPromoBr + "</html>");
+
+            //Ajoute les lignes au tableau élève
+            model.addRow(new Object[]{
+                liste.get(i).getUser().getId(),
+                liste.get(i).getUser().getNom(),
+                liste.get(i).getUser().getPrenom(),
+                liste.get(i).getFiliere(),
+                test.getText(), // multiligne
+                //listFiliere.substring(0, listFiliere.length() - 2), //moins le '; ' final
+                liste.get(i).getPromo(),
+                test1.getText(),});
+            //listPromo.substring(0, listPromo.length() - 2),});
+            //Adpater la taille des lignes
+            int filiere = calculHauteur(test.getText());
+            int promo = calculHauteur(test1.getText());
+            if (filiere >= promo) {
+                tailleLigne = filiere;
+            } else {
+                tailleLigne = promo;
+            }
+            jTableEtudiant.setRowHeight(i, tailleLigne);
+        }
+    }*/
+    
+    public void tableau(String filtre) {
+        DefaultTableModel model = (DefaultTableModel) jTableEtudiant.getModel();
+        model.getDataVector().clear();
+        //ArrayList<Eleve> liste = AdministrateurControleur.ListeEtudiant();
+        ArrayList<Eleve> liste = AdministrateurControleur.EtudiantFiltre(filtre,
+                jTextNom.getText(), jFiltreFiliere.getSelectedItem().toString(),
+                jFiltrePromotion.getSelectedItem().toString());
         int tailleLigne = 0;
         for (int i = 0; i < liste.size(); i++) {
             //Recupere la liste des filieres d'un étudiant
@@ -596,8 +649,8 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
         }
         if (idUser != -1) {
             try {
-                AdministrateurControleur.ModifierEleve(idUser,jNom.getText(), 
-                        jPrenom.getText(), 
+                AdministrateurControleur.ModifierEleve(idUser, jNom.getText(),
+                        jPrenom.getText(),
                         jAge.getText(),
                         jNumRue.getText(),
                         jRue.getText(),
@@ -617,7 +670,7 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
                     "Erreur modification. Sélectionner un étudiant",
                     "Résultat", JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_jBtnModifierActionPerformed
 
     private void jBtnSupprimerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnSupprimerMouseClicked
@@ -651,11 +704,11 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
         } else {
             idUser = Integer.parseInt(jIdEtu.getText());
         }
-        
+
         if (idUser == -1) {
             try {
-                AdministrateurControleur.AjouterEleve(jNom.getText(), 
-                        jPrenom.getText(), 
+                AdministrateurControleur.AjouterEleve(jNom.getText(),
+                        jPrenom.getText(),
                         jAge.getText(),
                         jNumRue.getText(),
                         jRue.getText(),
@@ -685,11 +738,11 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
             // model.getDataVector().clear();
             boolean existe = false;
             int i = jTableFiliere.getRowCount();
-            for (int j = 0; j <i; j++) {
-                if (jTableFiliere.getValueAt(j, 0).equals(jFiliere.getSelectedItem()) ) {
+            for (int j = 0; j < i; j++) {
+                if (jTableFiliere.getValueAt(j, 0).equals(jFiliere.getSelectedItem())) {
                     existe = true;
                 }
-                
+
             }
             if (existe == false) {
                 model.addRow(new Object[]{jFiliere.getSelectedItem()});
@@ -721,7 +774,7 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
             boolean existe = false;
             int i = jTablePromotion.getRowCount();
             for (int j = 0; j < i; j++) {
-                if (jTablePromotion.getValueAt(j, 0).toString().equals(jPromotion.getSelectedItem()) ) {
+                if (jTablePromotion.getValueAt(j, 0).toString().equals(jPromotion.getSelectedItem())) {
                     existe = true;
                 }
             }
@@ -744,6 +797,7 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
         jTablePromotion.repaint();
     }//GEN-LAST:event_jTablePromotionMouseClicked
 
+    /**/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField jAge;
     private javax.swing.JButton jBtnAjouter;
