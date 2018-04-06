@@ -159,6 +159,8 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
         DefaultTableModel model1 = (DefaultTableModel) jTablePromotion.getModel();
         model1.setRowCount(0);
         jTablePromotion.repaint();//Actualiser tableau
+        jFiliere.setSelectedItem("");
+        jPromotion.setSelectedItem("");
     }
 
     /**
@@ -268,17 +270,6 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
 
         jIdEtu.setEditable(false);
         jIdEtu.setText("Id");
-        jIdEtu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jIdEtuActionPerformed(evt);
-            }
-        });
-
-        jNom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jNomActionPerformed(evt);
-            }
-        });
 
         jFiliere.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jFiliere.addActionListener(new java.awt.event.ActionListener() {
@@ -291,12 +282,6 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
         jPromotion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPromotionActionPerformed(evt);
-            }
-        });
-
-        jRue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRueActionPerformed(evt);
             }
         });
 
@@ -563,14 +548,6 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
         setBounds(0, 0, 1774, 956);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNomActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jNomActionPerformed
-
-    private void jIdEtuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jIdEtuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jIdEtuActionPerformed
-
     private void jTableEtudiantMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableEtudiantMouseClicked
         // TODO add your handling code here:
         JTable source = (JTable) evt.getSource();
@@ -610,16 +587,31 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTableEtudiantMouseClicked
 
     private void jBtnModifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnModifierActionPerformed
-        // TODO add your handling code here:
         int idUser;
-        //Si le champs id est vide, on peut ajouter sinon erreur
+        //Si le champs id est vide, on peut pas modifier sinon erreur
         if (jIdEtu.getText().equals("Id") || jIdEtu.getText().equals("")) {
             idUser = -1; //
         } else {
             idUser = Integer.parseInt(jIdEtu.getText());
         }
         if (idUser != -1) {
-            
+            try {
+                AdministrateurControleur.ModifierEleve(idUser,jNom.getText(), 
+                        jPrenom.getText(), 
+                        jAge.getText(),
+                        jNumRue.getText(),
+                        jRue.getText(),
+                        jCP.getText(),
+                        jVille.getText(),
+                        jTableFiliere,
+                        jTablePromotion,
+                        this);
+                this.viderFormulaire();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null,
+                        "Erreur : impossible de modifier l'étudiant",
+                        "Résultat", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
             JOptionPane.showMessageDialog(null,
                     "Erreur modification. Sélectionner un étudiant",
@@ -662,7 +654,6 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
         
         if (idUser == -1) {
             try {
-                System.out.println(jAge.getText());
                 AdministrateurControleur.AjouterEleve(jNom.getText(), 
                         jPrenom.getText(), 
                         jAge.getText(),
@@ -694,10 +685,11 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
             // model.getDataVector().clear();
             boolean existe = false;
             int i = jTableFiliere.getRowCount();
-            for (int j = 0; j < i; j++) {
-                if (jTableFiliere.getValueAt(j, 0) == jFiliere.getSelectedItem()) {
+            for (int j = 0; j <i; j++) {
+                if (jTableFiliere.getValueAt(j, 0).equals(jFiliere.getSelectedItem()) ) {
                     existe = true;
                 }
+                
             }
             if (existe == false) {
                 model.addRow(new Object[]{jFiliere.getSelectedItem()});
@@ -729,7 +721,7 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
             boolean existe = false;
             int i = jTablePromotion.getRowCount();
             for (int j = 0; j < i; j++) {
-                if (jTablePromotion.getValueAt(j, 0) == jPromotion.getSelectedItem()) {
+                if (jTablePromotion.getValueAt(j, 0).toString().equals(jPromotion.getSelectedItem()) ) {
                     existe = true;
                 }
             }
@@ -751,10 +743,6 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
         model.removeRow(row);
         jTablePromotion.repaint();
     }//GEN-LAST:event_jTablePromotionMouseClicked
-
-    private void jRueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRueActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRueActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField jAge;

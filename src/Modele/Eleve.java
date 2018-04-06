@@ -244,31 +244,39 @@ public class Eleve extends Utilisateur {
         }
         return ok;
     }
+    
+    public static boolean modifierEleve(int id, int age, int numRue, int cp,
+            String nomRue, String ville, String nom, String prenom) {
+        boolean ok = false;
+        try {
+            String sql = "UPDATE utilisateur"
+                    + " SET nom = '"+nom+"',"
+                    + " prenom = '"+prenom+"'"
+                    + " WHERE id = "+id;
+            if (ConnexionParametres.executer(sql)) {
+                String sql2 = "UPDATE eleve"
+                        + " SET age = "+age+","
+                        + " numRue = "+numRue+","
+                        + " codePostal = "+cp+","
+                        + " libelleRue = '"+nomRue+"',"
+                        + " ville = '"+ville+"'"
+                        + " WHERE id = "+id;
+                if (ConnexionParametres.executer(sql2)) {
+                    ok = true;
+                }
+            };
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return ok;
+    }
 
     public static void main(String[] args) {
-        Eleve user = new Eleve();
-
-        ArrayList<Eleve> tabUser = new ArrayList<Eleve>();
-        tabUser = user.getAllList();
-
-        System.out.println(tabUser);
-
-        for (Eleve x : tabUser) {//foreach JAVA
-            System.out.println(x.getUser().getPrenom());
-            System.out.println(x.getUser().getNom());
-            System.out.println(x.getAge());
-            System.out.println(x.getVille());
-            ArrayList<ChoisirFiliere> tabFil = new ArrayList<ChoisirFiliere>();
-            tabFil = x.getFiliere();
-            for (ChoisirFiliere y : tabFil) {
-                System.out.println(y.getFiliere().getLibelle());
-            }
-            ArrayList<AppartenirPromotion> tabPromo = new ArrayList<AppartenirPromotion>();
-            tabPromo = x.getPromo();
-            for (AppartenirPromotion z : tabPromo) {
-                System.out.println(z.getPromotion().getAnnee());
-            }
-            // System.out.println(x.getFiliere());
-        }
+        Eleve eleve = Eleve.getById(5);
+        System.out.println(eleve.getUser().getId());
+        eleve.modifierEleve(eleve.getUser().getId(), 0, 0, 0,
+                "Rue","Ville","Giovanni","Martin");
     }
 }

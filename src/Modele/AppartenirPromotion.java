@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
  * @author Cécile
  */
 public class AppartenirPromotion {
+
     Utilisateur utilisateur;
     Promotion promotion;
 
@@ -41,7 +42,7 @@ public class AppartenirPromotion {
 
     public AppartenirPromotion() {
     }
-    
+
     public static ArrayList getByAll() {
         ArrayList tab = new ArrayList();
         try {
@@ -66,13 +67,13 @@ public class AppartenirPromotion {
         }
         return tab;
     }
-    
+
     public static ArrayList getByUtilisateur(int id) {
         ArrayList tab = new ArrayList();
         try {
             String sql = "SELECT * "
                     + "FROM appartenirpromotion "
-                    + "WHERE id_Utilisateur = "+id;
+                    + "WHERE id_Utilisateur = " + id;
             ResultSet rs = ConnexionParametres.requeter(sql);
             if (rs != null) {
                 while (rs.next()) {
@@ -91,13 +92,13 @@ public class AppartenirPromotion {
         }
         return tab;
     }
-    
+
     public static ArrayList getByPromotion(int id) {
         ArrayList tab = new ArrayList();
         try {
             String sql = "SELECT * "
                     + "FROM appartenirpromotion "
-                    + "WHERE id = "+id;
+                    + "WHERE id = " + id;
             ResultSet rs = ConnexionParametres.requeter(sql);
             if (rs != null) {
                 while (rs.next()) {
@@ -116,14 +117,14 @@ public class AppartenirPromotion {
         }
         return tab;
     }
-    
-    public static boolean ajouter(Utilisateur user, Promotion promo){
+
+    public static boolean ajouter(Utilisateur user, Promotion promo) {
         boolean res = false;
         try {
             String sql = "INSERT INTO appartenirpromotion "
-                    + "VALUES ( "+promo.getId()+", "+user.getId()+")";
+                    + "VALUES ( " + promo.getId() + ", " + user.getId() + ")";
             if (ConnexionParametres.executer(sql)) {
-                
+
                 res = true;
             };
         } catch (SQLException e) {
@@ -133,5 +134,21 @@ public class AppartenirPromotion {
         }
         return res;
     }
-    
+
+    public static boolean supprimerByUser(Utilisateur user) {
+        boolean res = false;
+        try {
+            String sql = "DELETE FROM appartenirpromotion"
+                    + " WHERE id = " + user.getId();
+            if (ConnexionParametres.executer(sql)) {
+                res = true;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return res;
+    }
+
 }

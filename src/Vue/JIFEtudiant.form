@@ -290,14 +290,8 @@
             <Property name="editable" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" value="Id"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jIdEtuActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jNom">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jNomActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jPrenom">
         </Component>
@@ -342,9 +336,6 @@
         <Component class="javax.swing.JTextField" name="jNumRue">
         </Component>
         <Component class="javax.swing.JTextField" name="jRue">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRueActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jCP">
         </Component>
