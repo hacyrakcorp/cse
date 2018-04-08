@@ -20,6 +20,8 @@ public class Utilisateur {
     String nom;
     String prenom;
     Statut id_statut;
+    
+    
 
     public int getId() {
         return id;
@@ -154,20 +156,63 @@ public class Utilisateur {
         }
         return obj;
     }
+    
+    public static boolean supprimerUtilisateur(int id){
+        boolean ok = false;
+        try {
+            String sql = "DELETE FROM utilisateur "
+                    + "WHERE id = "+ id;
+            if (ConnexionParametres.executer(sql)) {
+                ok = true;
+            };
+           
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return ok;
+    }
+    
+    public static boolean ajouterUtilisateur(String nom, String prenom, int statut){
+        boolean ok = false;
+        try {
+            String sql = "INSERT INTO utilisateur (nom, prenom, id_statut) "
+                    + "VALUES ('"+nom+"','"+prenom+"',"+statut+") ";
+            if (ConnexionParametres.executer(sql)) {
+                ok = true;
+            };
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return ok;
+    }
+    
+    public static int dernierID() throws SQLException {
+        String sql = "SELECT MAX(id) FROM utilisateur LIMIT 1";
+        ResultSet rs = ConnexionParametres.requeter(sql);
+        int id = -1;
+        if (rs.next()){
+            id = rs.getInt(1);
+        }
+        return id;
+    }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException{
         Utilisateur user = new Utilisateur();
 
         ArrayList<Utilisateur> tabUser = new ArrayList<Utilisateur>();
         tabUser = user.getAllList();
 
-        System.out.println(tabUser);
+       // System.out.println(tabUser);
 
         for (Utilisateur x : tabUser) {//foreach JAVA
-            System.out.println(x.getPrenom());
-            System.out.println(x.getNom());
+            //System.out.println(x.getPrenom());
+            //System.out.println(x.getNom());
         }
-
+        System.out.println(dernierID());
 
     }
 

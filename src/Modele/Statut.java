@@ -18,6 +18,10 @@ public class Statut {
     
     int id;
     String libelle;
+    
+    public final static int ADMIN = 1;
+    public final static int RF = 2;
+    public final static int ELEVE = 3;
 
     public int getId() {
         return id;

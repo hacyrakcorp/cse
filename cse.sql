@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Lun 19 Mars 2018 à 09:40
+-- Généré le :  Jeu 05 Avril 2018 à 14:21
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.1.10
 
@@ -37,7 +37,10 @@ CREATE TABLE `appartenirpromotion` (
 
 INSERT INTO `appartenirpromotion` (`id`, `id_Utilisateur`) VALUES
 (2, 3),
-(1, 4);
+(1, 12),
+(1, 17),
+(2, 17),
+(2, 19);
 
 -- --------------------------------------------------------
 
@@ -71,8 +74,16 @@ CREATE TABLE `choisirfiliere` (
 
 INSERT INTO `choisirfiliere` (`id`, `id_Filiere`) VALUES
 (3, 1),
-(4, 1),
-(3, 2);
+(10, 1),
+(3, 2),
+(9, 2),
+(17, 2),
+(19, 4),
+(9, 6),
+(12, 6),
+(17, 6),
+(8, 9),
+(10, 9);
 
 -- --------------------------------------------------------
 
@@ -95,8 +106,8 @@ CREATE TABLE `eleve` (
   `age` int(11) DEFAULT NULL,
   `numRue` int(11) DEFAULT NULL,
   `libelleRue` varchar(50) DEFAULT NULL,
-  `ville` varchar(25) NOT NULL,
-  `codePostal` int(11) NOT NULL,
+  `ville` varchar(25) DEFAULT NULL,
+  `codePostal` int(11) DEFAULT NULL,
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -106,7 +117,12 @@ CREATE TABLE `eleve` (
 
 INSERT INTO `eleve` (`age`, `numRue`, `libelleRue`, `ville`, `codePostal`, `id`) VALUES
 (18, 42, 'rue du test', 'Vitrolles', 13127, 3),
-(27, 62, 'rue du test', 'Plan d\'Orgon', 13750, 4);
+(NULL, NULL, NULL, NULL, NULL, 5),
+(NULL, NULL, NULL, NULL, NULL, 8),
+(NULL, NULL, NULL, NULL, NULL, 9),
+(4, 22, 'lontests', 'HAHA', 12345, 12),
+(1, 1, 'yolo', 'AZer', 23455, 17),
+(4, 42, 'yolo', 'Haha', 12345, 19);
 
 -- --------------------------------------------------------
 
@@ -199,7 +215,8 @@ CREATE TABLE `statut` (
 
 INSERT INTO `statut` (`id`, `libelle`) VALUES
 (1, 'administrateur'),
-(2, 'responsable de filiere');
+(2, 'responsable de filiere'),
+(3, 'eleve');
 
 -- --------------------------------------------------------
 
@@ -233,8 +250,14 @@ CREATE TABLE `utilisateur` (
 INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `motDePasse`, `id_Statut`) VALUES
 (1, 'Aliaga', 'Cecile', 'cecile', 1),
 (2, 'Miniscloux', 'Anthony', 'anthony', 2),
-(3, 'Test', 'Eleve1', NULL, NULL),
-(4, 'Test', 'Eleve2', NULL, NULL);
+(3, 'Test', 'Eleve1', NULL, 3),
+(5, 'Giovanni', 'Martin', NULL, 3),
+(8, 'Ruisi', 'Kaelan', NULL, 3),
+(9, 'Chabaud', 'Maeline', NULL, 3),
+(10, 'Chocolat', 'Leena', NULL, 3),
+(12, 'Quadrone', 'Leena', NULL, 3),
+(17, 'qsd', 'qsd', NULL, 3),
+(19, 'Azerty', 'Qwerty', NULL, 3);
 
 --
 -- Index pour les tables exportées
@@ -318,6 +341,7 @@ ALTER TABLE `typeevaluation`
 --
 ALTER TABLE `utilisateur`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nom` (`nom`),
   ADD KEY `FK_Utilisateur_id_Statut` (`id_Statut`);
 
 --
@@ -353,7 +377,7 @@ ALTER TABLE `promotion`
 -- AUTO_INCREMENT pour la table `statut`
 --
 ALTER TABLE `statut`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `typeevaluation`
 --
@@ -363,7 +387,7 @@ ALTER TABLE `typeevaluation`
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- Contraintes pour les tables exportées
 --
@@ -373,13 +397,13 @@ ALTER TABLE `utilisateur`
 --
 ALTER TABLE `appartenirpromotion`
   ADD CONSTRAINT `FK_appartenirPromotion_id` FOREIGN KEY (`id`) REFERENCES `promotion` (`id`),
-  ADD CONSTRAINT `FK_appartenirPromotion_id_Utilisateur` FOREIGN KEY (`id_Utilisateur`) REFERENCES `utilisateur` (`id`);
+  ADD CONSTRAINT `FK_appartenirPromotion_id_Utilisateur` FOREIGN KEY (`id_Utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `choisirfiliere`
 --
 ALTER TABLE `choisirfiliere`
-  ADD CONSTRAINT `FK_choisirFiliere_id` FOREIGN KEY (`id`) REFERENCES `utilisateur` (`id`),
+  ADD CONSTRAINT `FK_choisirFiliere_id` FOREIGN KEY (`id`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_choisirFiliere_id_Filiere` FOREIGN KEY (`id_Filiere`) REFERENCES `filiere` (`id`);
 
 --

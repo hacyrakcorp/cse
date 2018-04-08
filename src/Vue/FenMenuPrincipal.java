@@ -6,6 +6,7 @@
 package Vue;
 
 import Controleur.connexion.AdministrateurControleur;
+import Modele.Utilisateur;
 import java.awt.Font;
 
 /**
@@ -19,6 +20,26 @@ public class FenMenuPrincipal extends javax.swing.JFrame {
      */
     public FenMenuPrincipal() {
         initComponents();
+        jMenu_Admin.setFont(new Font ("Arial",Font.BOLD,20));
+        jMenu_Utilisateurs.setFont(new Font ("Arial",Font.PLAIN,20));
+        jMenuItem_Formateurs.setFont(new Font ("Arial",Font.PLAIN,20));
+        jMenuItem_Etudiants.setFont(new Font ("Arial",Font.PLAIN,20));
+        jMenuItem_Filières.setFont(new Font ("Arial",Font.PLAIN,20));
+        jMenu_RF.setFont(new Font ("Arial",Font.BOLD,20));
+        jMenu_ListeApprentis.setFont(new Font ("Arial",Font.PLAIN,20));
+        jMenu_Autre.setFont(new Font ("Arial",Font.BOLD,20));
+        jMenuItem_Quitter.setFont(new Font ("Arial",Font.PLAIN,20));
+        this.setDefaultLookAndFeelDecorated(true);
+        this.setExtendedState(this.MAXIMIZED_BOTH);
+       // this.add(jDesktopPane_Principal,border_layout.CENTER);
+       jDesktopPane_Principal.setSize(this.MAXIMIZED_HORIZ, this.MAXIMIZED_VERT);
+    }
+    
+    public FenMenuPrincipal(Utilisateur user) {
+        initComponents();
+        if (user.getId_statut().getId() == 2){
+            jMenu_Admin.setEnabled(false);
+        }
         jMenu_Admin.setFont(new Font ("Arial",Font.BOLD,20));
         jMenu_Utilisateurs.setFont(new Font ("Arial",Font.PLAIN,20));
         jMenuItem_Formateurs.setFont(new Font ("Arial",Font.PLAIN,20));
@@ -167,6 +188,9 @@ public class FenMenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem_FormateursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_FormateursActionPerformed
         // TODO add your handling code here:
+        JIFFormateur laFenetreInterne = new JIFFormateur();
+        jDesktopPane_Principal.add(laFenetreInterne);
+        laFenetreInterne.setVisible(true);
     }//GEN-LAST:event_jMenuItem_FormateursActionPerformed
 
     //Ajouter la fenêtre interne au DesktopPane
