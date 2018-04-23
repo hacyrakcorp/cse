@@ -17,6 +17,17 @@ import javax.swing.JOptionPane;
 public class Comprendre {
     Bulletin bulletin;
     Matiere matiere;
+    String commentaire;
+
+    public String getCommentaire() {
+        return commentaire;
+    }
+
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
+    }
+    
+    
 
     public Bulletin getBulletin() {
         return bulletin;
@@ -34,13 +45,16 @@ public class Comprendre {
         this.matiere = matiere;
     }
 
-    public Comprendre(Bulletin bulletin, Matiere matiere) {
+    public Comprendre(Bulletin bulletin, Matiere matiere, String commentaire) {
         this.bulletin = bulletin;
         this.matiere = matiere;
+        this.commentaire = commentaire;
     }
 
     public Comprendre() {
     }
+
+  
     
     public static ArrayList getAllList() {
         ArrayList tab = new ArrayList();
@@ -54,6 +68,7 @@ public class Comprendre {
                     Comprendre obj = new Comprendre();
                     obj.setBulletin(Bulletin.getById(rs.getInt("id")));
                     obj.setMatiere(Matiere.getById(rs.getInt("id_Matiere")));
+                    obj.setCommentaire(rs.getString("commentaire"));
                     tab.add(obj);
                 }
             }
@@ -78,6 +93,7 @@ public class Comprendre {
                     Comprendre obj = new Comprendre();
                    obj.setBulletin(Bulletin.getById(rs.getInt("id")));
                     obj.setMatiere(Matiere.getById(rs.getInt("id_Matiere")));
+                    obj.setCommentaire(rs.getString("commentaire"));
                     tab.add(obj);
                 }
             }
@@ -102,6 +118,7 @@ public class Comprendre {
                     Comprendre obj = new Comprendre();
                    obj.setBulletin(Bulletin.getById(rs.getInt("id")));
                     obj.setMatiere(Matiere.getById(rs.getInt("id_Matiere")));
+                    obj.setCommentaire(rs.getString("commentaire"));
                     tab.add(obj);
                 }
             }
@@ -114,11 +131,12 @@ public class Comprendre {
         return tab;
     }
     
-    public static boolean ajouter(Bulletin bulletin, Matiere matiere) {
+    public static boolean ajouter(Bulletin bulletin, Matiere matiere, String commentaire) {
         boolean res = false;
         try {
             String sql = "INSERT INTO comprendre "
-                    + "VALUES ( " + bulletin.getId() + ", " + matiere.getId() + ")";
+                    + "VALUES ( " + bulletin.getId() + ", " + matiere.getId() +
+                    ", " + commentaire + ")";
             if (ConnexionParametres.executer(sql)) {
 
                 res = true;

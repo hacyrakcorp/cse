@@ -19,9 +19,19 @@ public class Bulletin {
     String appreciation;
     String mention;
     Date date;
+    Date dateFin;
     int position;
     Utilisateur eleve;
 
+    public Date getDateFin() {
+        return dateFin;
+    }
+
+    public void setDateFin(Date dateFin) {
+        this.dateFin = dateFin;
+    }
+
+    
     public int getId() {
         return id;
     }
@@ -77,20 +87,22 @@ public class Bulletin {
     public void setEleve(Utilisateur eleve) {
         this.eleve = eleve;
     }
-    
-    
 
-    public Bulletin(int id, float moyenneGenerale, String appreciation, 
-            String mention, Date date, int position,
-            Utilisateur eleve) {
+    public Bulletin(int id, float moyenneGenerale, String appreciation, String mention, Date date, Date dateFin, int position, Utilisateur eleve) {
         this.id = id;
         this.moyenneGenerale = moyenneGenerale;
         this.appreciation = appreciation;
         this.mention = mention;
         this.date = date;
+        this.dateFin = dateFin;
         this.position = position;
         this.eleve = eleve;
     }
+    
+    
+
+    
+    
 
     public Bulletin() {
     }
@@ -107,6 +119,7 @@ public class Bulletin {
                     obj.setId(rs.getInt("id"));
                     obj.setAppreciation(rs.getString("appreciation"));
                     obj.setDate(rs.getDate("dateSituation"));
+                    obj.setDateFin(rs.getDate("dateFin"));
                     obj.setMention(rs.getString("mention"));
                     obj.setMoyenneGenerale(rs.getFloat("moyenneGenerale"));
                     obj.setPosition(rs.getInt("positionGenerale"));
@@ -136,6 +149,7 @@ public class Bulletin {
                     obj.setId(rs.getInt("id"));
                     obj.setAppreciation(rs.getString("appreciation"));
                     obj.setDate(rs.getDate("dateSituation"));
+                    obj.setDateFin(rs.getDate("dateFin"));
                     obj.setMention(rs.getString("mention"));
                     obj.setMoyenneGenerale(rs.getFloat("moyenneGenerale"));
                     obj.setPosition(rs.getInt("positionGenerale"));
@@ -164,6 +178,7 @@ public class Bulletin {
                     obj.setId(rs.getInt("id"));
                     obj.setAppreciation(rs.getString("appreciation"));
                     obj.setDate(rs.getDate("dateSituation"));
+                    obj.setDateFin(rs.getDate("dateFin"));
                     obj.setMention(rs.getString("mention"));
                     obj.setMoyenneGenerale(rs.getFloat("moyenneGenerale"));
                     obj.setPosition(rs.getInt("positionGenerale"));

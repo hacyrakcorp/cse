@@ -5,9 +5,8 @@
         <group>
             <file>file:/C:/UwAmp/www/cse/src/Controleur/connexion/RFAdministrateur.java</file>
             <file>file:/C:/UwAmp/www/cse/src/Vue/JIFVueBulletin.java</file>
-            <file>file:/C:/UwAmp/www/cse/src/Modele/TypeEvaluation.java</file>
+            <file>file:/C:/UwAmp/www/cse/src/Vue/JIFEtudiant.java</file>
             <file>file:/C:/UwAmp/www/cse/src/Modele/Comprendre.java</file>
-            <file>file:/C:/UwAmp/www/cse/src/Modele/Matiere.java</file>
             <file>file:/C:/UwAmp/www/cse/src/Modele/Note.java</file>
             <file>file:/C:/UwAmp/www/cse/src/Modele/Bulletin.java</file>
         </group>

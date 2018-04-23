@@ -135,4 +135,59 @@ public class Note {
         }
         return tab;
     }
+    
+    private static ArrayList noteParUserBulletinMatiere(int idUser, 
+            int idBulletin, int idMatiere){
+         ArrayList tab = new ArrayList();
+        try {
+            String sql = "SELECT * "
+                    + "FROM note, bulletin "
+                    + "WHERE note.dateSituation > bulletin.dateSituation "
+                    + "AND note.dateSituation < bulletin.dateFin "
+                    + "AND note.id_Utilisateur = bulletin.id_utilisateur "
+                    + "AND note.id_Utilisateur = "+ idUser
+                    + " AND bulletin.id = "+ idBulletin
+                    + " AND note.id_Matiere = "+ idMatiere;
+            
+           
+            ResultSet rs = ConnexionParametres.requeter(sql);
+            if (rs != null) {
+                while (rs.next()) {
+                    Note obj = new Note();
+                    obj.setId(rs.getInt("id"));
+                    obj.setNote(rs.getFloat("note"));
+                    obj.setCoef(rs.getInt("coefficient"));
+                    obj.setEleve(
+                            Utilisateur.getById(rs.getInt("id_Utilisateur")));
+                    obj.setMatiere(Matiere.getById(rs.getInt("id_Matiere")));
+                    tab.add(obj);
+                }
+            }
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Problème rencontré : " + e.getMessage(),
+                    "Résultat", JOptionPane.ERROR_MESSAGE);
+        }
+        return tab;
+    }
+    
+    public static void moyenneParMatiere(int idUser, int idBulletin, 
+            int idMatiere){
+        ArrayList<Note> tabNote = Note.noteParUserBulletinMatiere(idUser, 
+             idBulletin, idMatiere);
+        float moyenne = 0;
+        int coeff = 0;
+        for (Note uneNote : tabNote){
+            moyenne += uneNote.getNote()*uneNote.getCoef();
+            coeff += uneNote.getCoef();
+        }
+        
+        moyenne = moyenne/coeff;
+        System.out.println(moyenne);    
+    }
+    
+    public static void main(String[] args){
+        Note.moyenneParMatiere(17,2,1);
+    }
 }

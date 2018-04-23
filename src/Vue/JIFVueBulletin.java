@@ -10,6 +10,7 @@ import Controleur.connexion.RFAdministrateur;
 import Modele.AppartenirPromotion;
 import Modele.Bulletin;
 import Modele.ChoisirFiliere;
+import Modele.Comprendre;
 import Modele.Eleve;
 import java.util.ArrayList;
 import javax.swing.JLabel;
@@ -103,6 +104,12 @@ public class JIFVueBulletin extends javax.swing.JInternalFrame {
         model.setRowCount(0);
         table.setModel(model);
         table.repaint();
+    }
+    
+    private void viderFormulaire() {
+        jFormattedTxtDate.setText("");
+        jTextAreaAppreciation.setText("");
+        jTxtMoyGene.setText("");
     }
     
 
@@ -256,6 +263,11 @@ public class JIFVueBulletin extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableBulletin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableBulletinMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(jTableBulletin);
         if (jTableBulletin.getColumnModel().getColumnCount() > 0) {
             jTableBulletin.getColumnModel().getColumn(0).setMinWidth(0);
@@ -339,7 +351,9 @@ public class JIFVueBulletin extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jComboFiliereActionPerformed
 
     private void jTableEtudiantMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableEtudiantMouseClicked
-
+        DefaultTableModel mod = (DefaultTableModel) jTable1.getModel();
+        viderTable(mod,jTable1);
+        viderFormulaire();
         JTable source = (JTable) evt.getSource();
         int row = source.rowAtPoint(evt.getPoint());
         int iduser = Integer.parseInt(jTableEtudiant.getValueAt(row, 0).toString());
@@ -355,6 +369,39 @@ public class JIFVueBulletin extends javax.swing.JInternalFrame {
                 unBulletin.getDate()});
         }
     }//GEN-LAST:event_jTableEtudiantMouseClicked
+
+    private void jTableBulletinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableBulletinMouseClicked
+        JTable source = (JTable) evt.getSource();
+        int row = source.rowAtPoint(evt.getPoint());
+        int id = Integer.parseInt(jTableBulletin.getValueAt(row, 0).toString());
+        
+        Bulletin selected = Bulletin.getById(id);
+        
+        //Date
+        jFormattedTxtDate.setText(selected.getDate().toString());
+        //Appréciation
+        jTextAreaAppreciation.setText(selected.getAppreciation());
+        //Moyenne Général
+        jTxtMoyGene.setText(String.valueOf(selected.getMoyenneGenerale()));
+        
+        ArrayList<Comprendre> tabComprendre = Comprendre.getByBulletin(id);
+        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.getDataVector().clear();
+        viderTable(model, jTable1);
+        
+        //Moyenne par matiere
+        //Tous les notes de l'élève / matiere / compris entre les dates 
+        //Du bulletin
+                
+        for(Comprendre x : tabComprendre){
+            model.addRow(new Object[]{
+                x.getMatiere().getLibelle(),
+                0,
+                x.getCommentaire()});
+        }
+
+    }//GEN-LAST:event_jTableBulletinMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
