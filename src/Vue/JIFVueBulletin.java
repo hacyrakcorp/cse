@@ -12,6 +12,7 @@ import Modele.Bulletin;
 import Modele.ChoisirFiliere;
 import Modele.Comprendre;
 import Modele.Eleve;
+import Modele.Note;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -110,6 +111,8 @@ public class JIFVueBulletin extends javax.swing.JInternalFrame {
         jFormattedTxtDate.setText("");
         jTextAreaAppreciation.setText("");
         jTxtMoyGene.setText("");
+        jTxtMention.setText("");
+        jTxtPosition.setText("");
     }
     
 
@@ -138,6 +141,10 @@ public class JIFVueBulletin extends javax.swing.JInternalFrame {
         jTextAreaAppreciation = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTableBulletin = new javax.swing.JTable();
+        jTxtMention = new javax.swing.JTextField();
+        jLabMention = new javax.swing.JLabel();
+        jLabPosition = new javax.swing.JLabel();
+        jTxtPosition = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -202,24 +209,25 @@ public class JIFVueBulletin extends javax.swing.JInternalFrame {
 
         jLabEntete.setText("Bulletin du : ");
 
+        jFormattedTxtDate.setEditable(false);
         jFormattedTxtDate.setText("JJ/MM/AAAA");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Matière", "Moyenne", "Commentaire"
+                "Code", "Matière", "Moyenne", "Commentaire"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Float.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -234,8 +242,11 @@ public class JIFVueBulletin extends javax.swing.JInternalFrame {
 
         jLabMoyGene.setText("Moyenne générale");
 
+        jTxtMoyGene.setEditable(false);
+
         jLabAppreciation.setText("Appréciation générale :");
 
+        jTextAreaAppreciation.setEditable(false);
         jTextAreaAppreciation.setColumns(20);
         jTextAreaAppreciation.setRows(5);
         jScrollPane3.setViewportView(jTextAreaAppreciation);
@@ -275,6 +286,14 @@ public class JIFVueBulletin extends javax.swing.JInternalFrame {
             jTableBulletin.getColumnModel().getColumn(0).setMaxWidth(0);
         }
 
+        jTxtMention.setEditable(false);
+
+        jLabMention.setText("Mention :");
+
+        jLabPosition.setText("Position générale :");
+
+        jTxtPosition.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -287,26 +306,34 @@ public class JIFVueBulletin extends javax.swing.JInternalFrame {
                         .addGap(100, 100, 100)
                         .addComponent(jBtnValider))
                     .addComponent(jComboPromotion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(140, 140, 140)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane2)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabMoyGene)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTxtMoyGene, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabEntete)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jFormattedTxtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(259, 259, 259)
+                        .addComponent(jLabMention)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTxtMention, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(267, 267, 267)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabAppreciation)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabEntete)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jFormattedTxtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabAppreciation)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabMoyGene)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTxtMoyGene, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabPosition)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jTxtPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(355, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,25 +352,31 @@ public class JIFVueBulletin extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabEntete)
                             .addComponent(jFormattedTxtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(98, 98, 98)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabMoyGene)
-                            .addComponent(jTxtMoyGene, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTxtMoyGene, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabPosition)
+                            .addComponent(jTxtPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabAppreciation)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTxtMention, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabMention))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
-        setBounds(0, 0, 1136, 655);
+        setBounds(0, 0, 1774, 956);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboFiliereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboFiliereActionPerformed
@@ -376,6 +409,7 @@ public class JIFVueBulletin extends javax.swing.JInternalFrame {
         int id = Integer.parseInt(jTableBulletin.getValueAt(row, 0).toString());
         
         Bulletin selected = Bulletin.getById(id);
+        int idUser = selected.getEleve().getId();
         
         //Date
         jFormattedTxtDate.setText(selected.getDate().toString());
@@ -383,6 +417,10 @@ public class JIFVueBulletin extends javax.swing.JInternalFrame {
         jTextAreaAppreciation.setText(selected.getAppreciation());
         //Moyenne Général
         jTxtMoyGene.setText(String.valueOf(selected.getMoyenneGenerale()));
+        //Mention
+        jTxtMention.setText(selected.getMention());
+        //Position au niveau de la promotion
+        jTxtPosition.setText(String.valueOf(selected.getPosition()));
         
         ArrayList<Comprendre> tabComprendre = Comprendre.getByBulletin(id);
         
@@ -395,9 +433,15 @@ public class JIFVueBulletin extends javax.swing.JInternalFrame {
         //Du bulletin
                 
         for(Comprendre x : tabComprendre){
+            
+            float moy = Note.moyenneParMatiere(idUser, x.getBulletin().getId(), x.getMatiere().getId());
+            //System.out.println(idUser);
+            //System.out.println(x.getBulletin().getId());
+            //System.out.println(x.getMatiere().getId());
             model.addRow(new Object[]{
+                x.getMatiere().getCode(),
                 x.getMatiere().getLibelle(),
-                0,
+                moy,
                 x.getCommentaire()});
         }
 
@@ -411,7 +455,9 @@ public class JIFVueBulletin extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField jFormattedTxtDate;
     private javax.swing.JLabel jLabAppreciation;
     private javax.swing.JLabel jLabEntete;
+    private javax.swing.JLabel jLabMention;
     private javax.swing.JLabel jLabMoyGene;
+    private javax.swing.JLabel jLabPosition;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -420,6 +466,8 @@ public class JIFVueBulletin extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTableBulletin;
     private javax.swing.JTable jTableEtudiant;
     private javax.swing.JTextArea jTextAreaAppreciation;
+    private javax.swing.JTextField jTxtMention;
     private javax.swing.JTextField jTxtMoyGene;
+    private javax.swing.JTextField jTxtPosition;
     // End of variables declaration//GEN-END:variables
 }

@@ -172,10 +172,12 @@ public class Note {
         return tab;
     }
     
-    public static void moyenneParMatiere(int idUser, int idBulletin, 
+    public static float moyenneParMatiere(int idUser, int idBulletin, 
             int idMatiere){
+      
         ArrayList<Note> tabNote = Note.noteParUserBulletinMatiere(idUser, 
              idBulletin, idMatiere);
+        //System.out.println(tabNote);
         float moyenne = 0;
         int coeff = 0;
         for (Note uneNote : tabNote){
@@ -184,8 +186,10 @@ public class Note {
         }
         
         moyenne = moyenne/coeff;
-        System.out.println(moyenne);    
+        //System.out.println(moyenne);  
+        return moyenne ;
     }
+    
     
     public static void main(String[] args){
         Note.moyenneParMatiere(17,2,1);
