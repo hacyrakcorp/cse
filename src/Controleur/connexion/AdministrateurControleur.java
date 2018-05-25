@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Cécile
+ * @author Anthony
  */
 public class AdministrateurControleur {
 

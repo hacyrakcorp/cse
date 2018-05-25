@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Cécile
+ * @author Anthony
  */
 public class AuthentificationControleur {
 
@@ -26,10 +26,10 @@ public class AuthentificationControleur {
                 if (!Utilisateur.getByLogin(login).getMdp().equals("")) {
                     if (Utilisateur.getByLogin(login).getMdp().equals(mdp)) {
                         //Récupere le statut (getById_statut)
-                        Utilisateur user = Utilisateur.getByLogin(login);
+                        //Utilisateur user = Utilisateur.getByLogin(login);
                         //Rediriger vers la fenetre correspondante selon user
-                        FenMenuPrincipal laFenetre = new FenMenuPrincipal(user);
-                //        FenMenuPrincipal laFenetre = new FenMenuPrincipal();
+                        //FenMenuPrincipal laFenetre = new FenMenuPrincipal(user);
+                        FenMenuPrincipal laFenetre = new FenMenuPrincipal();
                         laFenetre.setVisible(true);
                         fenCo.dispose();
 

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Cécile
+ * @author Anthony
  */
 public class RFAdministrateur {
     public static ArrayList listeBulletinByEtudiant(int id){

@@ -7,7 +7,7 @@ package Controleur.connexion;
 
 /**
  *
- * @author Cécile
+ * @author Anthony
  */
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
