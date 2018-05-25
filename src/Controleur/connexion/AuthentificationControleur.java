@@ -28,8 +28,8 @@ public class AuthentificationControleur {
                         //Récupere le statut (getById_statut)
                         Utilisateur user = Utilisateur.getByLogin(login);
                         //Rediriger vers la fenetre correspondante selon user
-                //        FenMenuPrincipal laFenetre = new FenMenuPrincipal(user);
-                        FenMenuPrincipal laFenetre = new FenMenuPrincipal();
+                        FenMenuPrincipal laFenetre = new FenMenuPrincipal(user);
+                //        FenMenuPrincipal laFenetre = new FenMenuPrincipal();
                         laFenetre.setVisible(true);
                         fenCo.dispose();
 

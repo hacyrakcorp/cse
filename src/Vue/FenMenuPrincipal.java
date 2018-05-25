@@ -26,7 +26,7 @@ public class FenMenuPrincipal extends javax.swing.JFrame {
         jMenuItem_Etudiants.setFont(new Font ("Arial",Font.PLAIN,20));
         jMenuItem_Filières.setFont(new Font ("Arial",Font.PLAIN,20));
         jMenu_RF.setFont(new Font ("Arial",Font.BOLD,20));
-        jMenu_ListeApprentis.setFont(new Font ("Arial",Font.PLAIN,20));
+        jMenuListeApp.setFont(new Font ("Arial",Font.PLAIN,20));
         jMenu_Autre.setFont(new Font ("Arial",Font.BOLD,20));
         jMenuItem_Quitter.setFont(new Font ("Arial",Font.PLAIN,20));
         this.setDefaultLookAndFeelDecorated(true);
@@ -46,7 +46,7 @@ public class FenMenuPrincipal extends javax.swing.JFrame {
         jMenuItem_Etudiants.setFont(new Font ("Arial",Font.PLAIN,20));
         jMenuItem_Filières.setFont(new Font ("Arial",Font.PLAIN,20));
         jMenu_RF.setFont(new Font ("Arial",Font.BOLD,20));
-        jMenu_ListeApprentis.setFont(new Font ("Arial",Font.PLAIN,20));
+        jMenuListeApp.setFont(new Font ("Arial",Font.PLAIN,20));
         jMenu_Autre.setFont(new Font ("Arial",Font.BOLD,20));
         jMenuItem_Quitter.setFont(new Font ("Arial",Font.PLAIN,20));
         this.setDefaultLookAndFeelDecorated(true);
@@ -72,15 +72,13 @@ public class FenMenuPrincipal extends javax.swing.JFrame {
         jMenuItem_Etudiants = new javax.swing.JMenuItem();
         jMenuItem_Filières = new javax.swing.JMenuItem();
         jMenu_RF = new javax.swing.JMenu();
-        jMenu_ListeApprentis = new javax.swing.JMenu();
+        jMenuListeApp = new javax.swing.JMenuItem();
         jMenu_Autre = new javax.swing.JMenu();
         jMenuItem_Quitter = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CONSEIL DE SECTION");
-        setMaximumSize(new java.awt.Dimension(1280, 800));
         setMinimumSize(new java.awt.Dimension(1280, 800));
-        setPreferredSize(new java.awt.Dimension(1280, 800));
         setSize(new java.awt.Dimension(1280, 800));
 
         javax.swing.GroupLayout jDesktopPane_PrincipalLayout = new javax.swing.GroupLayout(jDesktopPane_Principal);
@@ -132,8 +130,13 @@ public class FenMenuPrincipal extends javax.swing.JFrame {
 
         jMenu_RF.setText("Responsable de filière");
 
-        jMenu_ListeApprentis.setText("Liste des apprentis");
-        jMenu_RF.add(jMenu_ListeApprentis);
+        jMenuListeApp.setText("Liste des apprentis");
+        jMenuListeApp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuListeAppActionPerformed(evt);
+            }
+        });
+        jMenu_RF.add(jMenuListeApp);
 
         jMenuBar_Principal.add(jMenu_RF);
 
@@ -210,6 +213,13 @@ public class FenMenuPrincipal extends javax.swing.JFrame {
         laFenetreInterne.setVisible(true);
     }//GEN-LAST:event_jMenuItem_EtudiantsActionPerformed
 
+    private void jMenuListeAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListeAppActionPerformed
+        // TODO add your handling code here:
+        JIFVueBulletin laFenetreInterne = new JIFVueBulletin();
+        jDesktopPane_Principal.add(laFenetreInterne);
+        laFenetreInterne.setVisible(true);
+    }//GEN-LAST:event_jMenuListeAppActionPerformed
+
 
     //Définition de l'ensemble des variables
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -219,9 +229,9 @@ public class FenMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem_Filières;
     private javax.swing.JMenuItem jMenuItem_Formateurs;
     private javax.swing.JMenuItem jMenuItem_Quitter;
+    private javax.swing.JMenuItem jMenuListeApp;
     private javax.swing.JMenu jMenu_Admin;
     private javax.swing.JMenu jMenu_Autre;
-    private javax.swing.JMenu jMenu_ListeApprentis;
     private javax.swing.JMenu jMenu_RF;
     private javax.swing.JMenu jMenu_Utilisateurs;
     // End of variables declaration//GEN-END:variables

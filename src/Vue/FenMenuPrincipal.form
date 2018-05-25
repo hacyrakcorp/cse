@@ -58,11 +58,14 @@
             <Property name="text" type="java.lang.String" value="Responsable de fili&#xe8;re"/>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="jMenu_ListeApprentis">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuListeApp">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Liste des apprentis"/>
               </Properties>
-            </Menu>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuListeAppActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu_Autre">

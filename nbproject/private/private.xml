@@ -7,12 +7,21 @@
 =======
         <group>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <file>file:/C:/Users/aminiscloux/Documents/GitHub/cse/src/Vue/JIFEtudiant.java</file>
             <file>file:/C:/Users/aminiscloux/Documents/GitHub/cse/src/Controleur/connexion/AdministrateurControleur.java</file>
             <file>file:/C:/Users/aminiscloux/Documents/GitHub/cse/src/Vue/FenConnexion.java</file>
 =======
             <file>file:/C:/UwAmp/www/cse/src/Vue/JIFEtudiant.java</file>
             <file>file:/C:/UwAmp/www/cse/src/Controleur/connexion/AdministrateurControleur.java</file>
+>>>>>>> cecile
+=======
+            <file>file:/C:/UwAmp/www/cse/src/Controleur/connexion/RFAdministrateur.java</file>
+            <file>file:/C:/UwAmp/www/cse/src/Vue/JIFVueBulletin.java</file>
+            <file>file:/C:/UwAmp/www/cse/src/Vue/JIFEtudiant.java</file>
+            <file>file:/C:/UwAmp/www/cse/src/Modele/Comprendre.java</file>
+            <file>file:/C:/UwAmp/www/cse/src/Modele/Note.java</file>
+            <file>file:/C:/UwAmp/www/cse/src/Modele/Bulletin.java</file>
 >>>>>>> cecile
         </group>
 >>>>>>> fcb04c9febf9bb778a39ec8fd490c17d25d48b5f
