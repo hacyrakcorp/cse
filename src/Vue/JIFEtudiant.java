@@ -278,6 +278,11 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
         jLabelFiltre.setText("Filtre :");
 
         jBtnValider.setText("Valider");
+        jBtnValider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnValiderActionPerformed(evt);
+            }
+        });
 
         jFiltreFiliere.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -796,6 +801,27 @@ public class JIFEtudiant extends javax.swing.JInternalFrame {
         model.removeRow(row);
         jTablePromotion.repaint();
     }//GEN-LAST:event_jTablePromotionMouseClicked
+
+    private void jBtnValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnValiderActionPerformed
+        // TODO add your handling code here:
+        String filtre = "";
+        if (!jTextNom.equals("")) {
+            filtre = "Nom";
+        } 
+        if (!jFiltreFiliere.getSelectedItem().toString().equals("")
+                && jFiltrePromotion.getSelectedItem().toString().equals("")) {
+            filtre = "Filiere";
+        } else if (jFiltreFiliere.getSelectedItem().toString().equals("")
+                && !jFiltrePromotion.getSelectedItem().toString().equals("")) {
+            System.out.println("Promo");
+            filtre = "Promo";
+        } else if (!jFiltreFiliere.getSelectedItem().toString().equals("")
+                && !jFiltrePromotion.getSelectedItem().toString().equals("")) {
+            System.out.println("PromoFiliere");
+            filtre = "FilierePromo";
+        }
+        tableau(filtre);
+    }//GEN-LAST:event_jBtnValiderActionPerformed
 
     /**/
     // Variables declaration - do not modify//GEN-BEGIN:variables
