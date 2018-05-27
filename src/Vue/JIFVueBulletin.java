@@ -415,7 +415,7 @@ public class JIFVueBulletin extends javax.swing.JInternalFrame {
         jFormattedTxtDate.setText(selected.getDate().toString());
         //Appréciation
         jTextAreaAppreciation.setText(selected.getAppreciation());
-        //Moyenne Général
+        //Moyenne Générale
         jTxtMoyGene.setText(String.valueOf(selected.getMoyenneGenerale()));
         //Mention
         jTxtMention.setText(selected.getMention());
