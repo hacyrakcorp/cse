@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Jeu 05 Avril 2018 à 14:21
+-- Généré le :  Jeu 19 Avril 2018 à 14:04
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.1.10
 
@@ -37,6 +37,10 @@ CREATE TABLE `appartenirpromotion` (
 
 INSERT INTO `appartenirpromotion` (`id`, `id_Utilisateur`) VALUES
 (2, 3),
+(1, 5),
+(2, 5),
+(2, 8),
+(1, 9),
 (1, 12),
 (1, 17),
 (2, 17),
@@ -54,8 +58,19 @@ CREATE TABLE `bulletin` (
   `appreciation` longtext,
   `mention` varchar(50) DEFAULT NULL,
   `dateSituation` date DEFAULT NULL,
-  `positionGenerale` int(11) DEFAULT NULL
+  `positionGenerale` int(11) DEFAULT NULL,
+  `id_utilisateur` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `bulletin`
+--
+
+INSERT INTO `bulletin` (`id`, `moyenneGenerale`, `appreciation`, `mention`, `dateSituation`, `positionGenerale`, `id_utilisateur`) VALUES
+(1, 12.3, 'test appreciation', 'haha', '2018-04-16', 8, 17),
+(2, 11, 'tititititititi', 'toto', '2018-04-01', 42, 17),
+(3, 10, 'tututututu', 'tutu', '2018-04-19', 1, 12),
+(4, 12, '12', '12', '2018-04-19', 12, 12);
 
 -- --------------------------------------------------------
 
@@ -74,7 +89,6 @@ CREATE TABLE `choisirfiliere` (
 
 INSERT INTO `choisirfiliere` (`id`, `id_Filiere`) VALUES
 (3, 1),
-(10, 1),
 (3, 2),
 (9, 2),
 (17, 2),
@@ -82,8 +96,8 @@ INSERT INTO `choisirfiliere` (`id`, `id_Filiere`) VALUES
 (9, 6),
 (12, 6),
 (17, 6),
-(8, 9),
-(10, 9);
+(5, 9),
+(8, 9);
 
 -- --------------------------------------------------------
 
@@ -117,9 +131,9 @@ CREATE TABLE `eleve` (
 
 INSERT INTO `eleve` (`age`, `numRue`, `libelleRue`, `ville`, `codePostal`, `id`) VALUES
 (18, 42, 'rue du test', 'Vitrolles', 13127, 3),
-(NULL, NULL, NULL, NULL, NULL, 5),
-(NULL, NULL, NULL, NULL, NULL, 8),
-(NULL, NULL, NULL, NULL, NULL, 9),
+(1, 12, 'Rue du test', 'Ville test', 1234, 5),
+(0, 0, '', '', 0, 8),
+(0, 0, '', '', 0, 9),
 (4, 22, 'lontests', 'HAHA', 12345, 12),
 (1, 1, 'yolo', 'AZer', 23455, 17),
 (4, 42, 'yolo', 'Haha', 12345, 19);
@@ -161,6 +175,14 @@ CREATE TABLE `matiere` (
   `libelle` varchar(50) NOT NULL,
   `commentaire` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `matiere`
+--
+
+INSERT INTO `matiere` (`id`, `code`, `coefficient`, `libelle`, `commentaire`) VALUES
+(1, 'U12', 2, 'Anglais', 'hahahahahahahahahahahahahahahahahahahahahah'),
+(2, 'U11', 2, 'Français', 'hohohohohohohohohohohohohohohohohoho');
 
 -- --------------------------------------------------------
 
@@ -216,7 +238,8 @@ CREATE TABLE `statut` (
 INSERT INTO `statut` (`id`, `libelle`) VALUES
 (1, 'administrateur'),
 (2, 'responsable de filiere'),
-(3, 'eleve');
+(3, 'eleve'),
+(4, 'formateur');
 
 -- --------------------------------------------------------
 
@@ -228,6 +251,15 @@ CREATE TABLE `typeevaluation` (
   `id` int(11) NOT NULL,
   `libelle` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `typeevaluation`
+--
+
+INSERT INTO `typeevaluation` (`id`, `libelle`) VALUES
+(1, 'DEVOIR SURVEILLE'),
+(2, 'ECRIT'),
+(3, 'ORAL');
 
 -- --------------------------------------------------------
 
@@ -254,7 +286,6 @@ INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `motDePasse`, `id_Statut`) VAL
 (5, 'Giovanni', 'Martin', NULL, 3),
 (8, 'Ruisi', 'Kaelan', NULL, 3),
 (9, 'Chabaud', 'Maeline', NULL, 3),
-(10, 'Chocolat', 'Leena', NULL, 3),
 (12, 'Quadrone', 'Leena', NULL, 3),
 (17, 'qsd', 'qsd', NULL, 3),
 (19, 'Azerty', 'Qwerty', NULL, 3);
@@ -352,7 +383,7 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT pour la table `bulletin`
 --
 ALTER TABLE `bulletin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `filiere`
 --
@@ -362,7 +393,7 @@ ALTER TABLE `filiere`
 -- AUTO_INCREMENT pour la table `matiere`
 --
 ALTER TABLE `matiere`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `note`
 --
@@ -377,12 +408,12 @@ ALTER TABLE `promotion`
 -- AUTO_INCREMENT pour la table `statut`
 --
 ALTER TABLE `statut`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `typeevaluation`
 --
 ALTER TABLE `typeevaluation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `utilisateur`
 --

@@ -1,7 +1,17 @@
 /build/
 nbproject/private/private.properties
 nbproject/private/private.xml
+<<<<<<< HEAD
 *.properties
 nbproject/private/private.xml
 nbproject/private/private.properties
+<<<<<<< HEAD
 nbproject/private/private.properties
+=======
+=======
+/dist/
+>>>>>>> cecile
+*.xml
+*.properties
+>>>>>>> 1cdaaf3aa8fd930d66441fe649a9f0f9554744ef
+*.xml

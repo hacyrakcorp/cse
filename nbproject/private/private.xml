@@ -3,8 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Anthony%20-%20Nathalie/Documents/NetBeansProjects/cse/src/Controleur/connexion/AdministrateurControleur.java</file>
             <file>file:/C:/Users/Anthony%20-%20Nathalie/Documents/NetBeansProjects/cse/src/Modele/AppartenirPromotion.java</file>
+=======
+            <file>file:/C:/Users/aminiscloux/Documents/NetBeansProjects/cse/src/Controleur/connexion/RFAdministrateur.java</file>
+            <file>file:/C:/Users/aminiscloux/Documents/NetBeansProjects/cse/src/Vue/FenConnexion.java</file>
+            <file>file:/C:/Users/aminiscloux/Documents/NetBeansProjects/cse/src/Vue/FenMenuPrincipal.java</file>
+            <file>file:/C:/Users/aminiscloux/Documents/NetBeansProjects/cse/src/Vue/JIFVueBulletin.java</file>
+            <file>file:/C:/Users/aminiscloux/Documents/NetBeansProjects/cse/src/Vue/JIFEtudiant.java</file>
+            <file>file:/C:/Users/aminiscloux/Documents/NetBeansProjects/cse/src/Controleur/connexion/ConnexionControleur.java</file>
+>>>>>>> 1cdaaf3aa8fd930d66441fe649a9f0f9554744ef
         </group>
     </open-files>
 </project-private>

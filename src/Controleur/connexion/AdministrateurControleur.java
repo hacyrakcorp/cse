@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Cécile
+ * @author Anthony
  */
 public class AdministrateurControleur {
 
@@ -225,11 +225,8 @@ public class AdministrateurControleur {
                 JOptionPane.showMessageDialog(null,
                         "Impossible de modifier l'élève",
                         "Résultat", JOptionPane.ERROR_MESSAGE);
-            }
-            
-        }
-        
-        
+            }   
+        }    
     }
 
     public static Eleve SelectedEtudiant(int iduser) {
