@@ -2,19 +2,9 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/aminiscloux/Documents/GitHub/cse/src/Vue/JIFEtudiant.java</file>
-            <file>file:/C:/Users/aminiscloux/Documents/GitHub/cse/src/Controleur/connexion/AdministrateurControleur.java</file>
-            <file>file:/C:/Users/aminiscloux/Documents/GitHub/cse/src/Vue/FenConnexion.java</file>
-=======
-            <file>file:/C:/UwAmp/www/cse/src/Vue/JIFEtudiant.java</file>
-            <file>file:/C:/UwAmp/www/cse/src/Controleur/connexion/AdministrateurControleur.java</file>
->>>>>>> cecile
+            <file>file:/C:/Users/Anthony%20-%20Nathalie/Documents/NetBeansProjects/cse/src/Controleur/connexion/AdministrateurControleur.java</file>
+            <file>file:/C:/Users/Anthony%20-%20Nathalie/Documents/NetBeansProjects/cse/src/Modele/AppartenirPromotion.java</file>
         </group>
->>>>>>> fcb04c9febf9bb778a39ec8fd490c17d25d48b5f
     </open-files>
 </project-private>
